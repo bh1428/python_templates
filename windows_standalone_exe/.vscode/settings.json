@@ -1,0 +1,22 @@
+{
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length=120"
+    ],
+    "python.linting.mypyEnabled": true,
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black",
+	"python.pythonPath": "${workspaceFolder}\\venv\\Scripts\\python.exe",
+    "cSpell.enabled": true,
+    "python.formatting.blackArgs": [
+        "--line-length=120"
+    ],
+    "cSpell.words": [
+        "Struct",
+        "envvar",
+        "flags'r",
+        "pyinstaller"
+    ]
+}
