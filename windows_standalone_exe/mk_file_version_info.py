@@ -1,4 +1,4 @@
-"""Create version info file."""
+"""Create version info file"""
 import datetime as dt
 import re
 import os.path
@@ -7,7 +7,7 @@ import time
 
 import click
 
-__version__ = "2020.3.25"
+__version__ = "2020.3.27"
 
 # constants
 COMPANY = "My Company"
@@ -173,4 +173,5 @@ def click_main(py_script, company, copyright_years, out):
 
 
 if __name__ == "__main__":
+    # pylint: disable=no-value-for-parameter
     click_main()

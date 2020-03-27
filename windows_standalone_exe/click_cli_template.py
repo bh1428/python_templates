@@ -9,7 +9,7 @@ import click
 
 import application
 
-__version__ = "2020.3.25"
+__version__ = "2020.3.27"
 
 # logging configuration
 LOG_CONFIG = {
@@ -104,6 +104,7 @@ if __name__ == "__main__":
     """
     script_name = pathlib.Path(__file__).stem.upper()
     try:
+        # pylint: disable=no-value-for-parameter, unexpected-keyword-arg
         return_code = click_main(standalone_mode=False, auto_envvar_prefix=script_name)
     except click.ClickException as exc:
         # standalone mode ignores exception: catch them anyway and give meaningful error
