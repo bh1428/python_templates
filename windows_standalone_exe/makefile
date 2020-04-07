@@ -2,7 +2,7 @@
 # makefile for windows_standalone_exe template
 #
 
-# Version: 2020.3.25
+# Version: 2020.4.6
 
 # Start new project:
 #  1) Copy template folder to a new folder (rename).
@@ -94,7 +94,7 @@ build_exe: $(VENV_ACTIVATE) pre_build_exe
 
 .PHONY: post_build_exe
 post_build_exe: build_exe
-	$(CMD) /c "FOR %%F IN ($(EXTRA_FILES)) DO IF EXIST %%F copy %%F dist"
+	$(CMD) /c "FOR %%F IN ($(EXTRA_FILES)) DO IF EXIST "%%F" copy "%%F" dist"
 	$(CMD) /c "FOR %%F IN ($(POST_BUILD_CLEAN_DIRS)) DO IF EXIST %%F rmdir /q /s %%F"
 	$(CMD) /c "FOR %%F IN ($(POST_BUILD_CLEAN_FILES)) DO IF EXIST %%F del %%F"
 
