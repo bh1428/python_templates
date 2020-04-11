@@ -2,7 +2,7 @@
 # makefile for Visual Studio Code (VSC) based Python projects
 #
 
-# Version: 2020.3.25
+# Version: 2020.4.11
 
 # Start new project:
 #  1) Copy template folder to a new folder (rename).
@@ -15,8 +15,9 @@
 #   venv                  create new virtual environment, if the
 #                         *requirements.txt files already exists they will be
 #                         used, otherwise new ones will be created
+#   upgrade_pip_tools     upgrade the pip-tools package
 #   upgrade_requirements  upgrade *requirements.txt files without installing
-#   upgrade_venv          upgrade *requirements.txt and install packages
+#   upgrade_venv          upgrade pip-tools, *requirements.txt and install packages
 #   sync                  synchronize venv with *requirements.txt (default target)
 #   info                  show list of installed packages in the venv
 #   clean                 remove virtual environment
@@ -37,6 +38,8 @@ PIP_COMPILE := $(VENV)\pip-compile.exe
 
 all: sync
 
+.NOTPARALLEL:
+
 $(VENV_ACTIVATE):
 	$(PYTHON) -m venv $(VENV_DIR)
 	$(VENV_PYTHON) -m pip install --upgrade pip
@@ -55,11 +58,10 @@ requirements.txt: $(VENV_ACTIVATE) requirements.in
 dev-requirements.txt: $(VENV_ACTIVATE) dev-requirements.in requirements.txt
 	$(PIP_COMPILE) dev-requirements.in
 
-.PHONY: upgrade_venv
-upgrade_venv: $(VENV_ACTIVATE)
-	$(PIP_COMPILE) requirements.in --upgrade
-	$(PIP_COMPILE) dev-requirements.in --upgrade
-	$(PIP_SYNC) dev-requirements.txt
+.PHONY: upgrade_pip_tools
+upgrade_pip_tools: $(VENV_ACTIVATE)
+	$(VENV_PYTHON) -m pip install --upgrade pip
+	$(PIP) install pip-tools --upgrade
 
 .PHONY: upgrade_requirements
 upgrade_requirements: $(VENV_ACTIVATE)
@@ -70,6 +72,9 @@ upgrade_requirements: $(VENV_ACTIVATE)
 sync: $(VENV_ACTIVATE) dev-requirements.txt
 	$(PIP_SYNC) dev-requirements.txt
 
+.PHONY: upgrade_venv
+upgrade_venv: upgrade_pip_tools upgrade_requirements sync
+    
 .PHONY: info
 info: $(VENV_ACTIVATE)
 	$(PIP) list
