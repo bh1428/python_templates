@@ -2,7 +2,7 @@
 # makefile for Visual Studio Code (VSC) based Python projects
 #
 
-# Version: 2020.4.11
+# Version: 2020.4.16
 
 # Start new project:
 #  1) Copy template folder to a new folder (rename).
@@ -15,7 +15,7 @@
 #   venv                  create new virtual environment, if the
 #                         *requirements.txt files already exists they will be
 #                         used, otherwise new ones will be created
-#   upgrade_pip_tools     upgrade the pip-tools package
+#   upgrade_pip_tools     upgrade pip and the pip-tools package
 #   upgrade_requirements  upgrade *requirements.txt files without installing
 #   upgrade_venv          upgrade pip-tools, *requirements.txt and install packages
 #   sync                  synchronize venv with *requirements.txt (default target)
@@ -42,8 +42,8 @@ all: sync
 
 $(VENV_ACTIVATE):
 	$(PYTHON) -m venv $(VENV_DIR)
-	$(VENV_PYTHON) -m pip install --upgrade pip
-	$(PIP) install pip-tools
+	$(VENV_PYTHON) -m pip install pip --upgrade
+	$(VENV_PYTHON) -m pip install pip-tools
     ifeq (,$(wildcard requirements.txt))
 		$(PIP_COMPILE) requirements.in
     endif
@@ -60,8 +60,8 @@ dev-requirements.txt: $(VENV_ACTIVATE) dev-requirements.in requirements.txt
 
 .PHONY: upgrade_pip_tools
 upgrade_pip_tools: $(VENV_ACTIVATE)
-	$(VENV_PYTHON) -m pip install --upgrade pip
-	$(PIP) install pip-tools --upgrade
+	$(VENV_PYTHON) -m pip install pip --upgrade
+	$(VENV_PYTHON) -m pip install pip-tools --upgrade
 
 .PHONY: upgrade_requirements
 upgrade_requirements: $(VENV_ACTIVATE)
