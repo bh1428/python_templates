@@ -9,7 +9,7 @@ import click
 
 import application
 
-__version__ = "2020.3.27"
+__version__ = "2020.5.13"
 
 # logging configuration
 LOG_CONFIG = {
@@ -17,7 +17,7 @@ LOG_CONFIG = {
     "disable_existing_loggers": False,
     "formatters": {
         "simple": {"format": "%(asctime)s %(levelname)s %(message)s"},
-        "precise": {"format": "[%(asctime)s] [%(levelname)s] [%(name)s.%(funcName)s] %(message)s"},
+        "precise": {"format": "%(asctime)s %(levelname)s [%(name)s.%(funcName)s] %(message)s"},
     },
     "handlers": {
         "console": {
