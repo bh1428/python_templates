@@ -1,18 +1,6 @@
 #
-# makefile for windows_standalone_exe template
+# makefile for {{cookiecutter.repo_name}}
 #
-
-# Version: 2020.4.16
-
-# Start new project:
-#  1) Copy template folder to a new folder (rename).
-#  2) Execute (in the new folder): make
-#  3) Check result in dist directory, if everything works the template is
-#     still valid, continue with normal development.
-#  4) Change SCRIPT_NAME to the name of the script to be started.
-
-# You now have a virtual environment you can use with Visual Studio Code
-# to develop the new script.
 
 # Build executable / development:
 #  1) Develop and test script until it is ready for deployment / packaging.
@@ -27,9 +15,6 @@
 #  8) If all goes well: .exe will be in the 'dist' directory.
 
 # Make targets (can be used when calling make):
-#   venv                  create new virtual environment, if the
-#                         *requirements.txt files already exists they will be
-#                         used, otherwise new ones will be created
 #   build                 create virtual environment (if required) and build
 #                         executable (this is the default target (all))
 #   upgrade_pip_tools     upgrade pip and the pip-tools package
@@ -41,7 +26,7 @@
 #   clean_venv            remove virtual environment
 
 # script properties
-SCRIPT_NAME := click_cli_template
+SCRIPT_NAME := {{cookiecutter.repo_name}}
 EXTRA_FILES :=
 ICON_FILE := images/python.ico
 
@@ -55,7 +40,7 @@ POST_BUILD_CLEAN_FILES :=
 
 # binaries / executables
 CMD := "C:\Windows\System32\cmd.exe"
-PYTHON := "C:\Program Files\Python38\python.exe"
+PYTHON := "{{ cookiecutter.python_path }}"
 VENV := .\$(VENV_DIR)\Scripts
 VENV_ACTIVATE := $(VENV)\activate.bat
 VENV_PYTHON := $(VENV)\python.exe
@@ -114,7 +99,7 @@ dev-requirements.txt: $(VENV_ACTIVATE) dev-requirements.in requirements.txt
 upgrade_pip_tools: $(VENV_ACTIVATE)
 	$(VENV_PYTHON) -m pip install pip --upgrade
 	$(VENV_PYTHON) -m pip install pip-tools --upgrade
-    
+
 .PHONY: upgrade_requirements
 upgrade_requirements: $(VENV_ACTIVATE)
 	$(PIP_COMPILE) requirements.in --upgrade
@@ -126,7 +111,7 @@ sync: $(VENV_ACTIVATE) dev-requirements.txt
 
 .PHONY: upgrade_venv
 upgrade_venv: upgrade_pip_tools upgrade_requirements sync
-    
+
 .PHONY: info
 info: $(VENV_ACTIVATE)
 	$(PIP) list
