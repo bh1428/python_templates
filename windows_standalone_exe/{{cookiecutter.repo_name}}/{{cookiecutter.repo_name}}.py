@@ -1,4 +1,6 @@
-"""cli template using click (with logging)"""
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Main script for {{cookiecutter.repo_name}}"""
 import logging
 import logging.config
 import os
@@ -9,7 +11,7 @@ import click
 
 import application
 
-__version__ = "2020.5.13"
+__version__ = "2020.5.16"
 
 # logging configuration
 LOG_CONFIG = {

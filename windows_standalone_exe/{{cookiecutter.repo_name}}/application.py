@@ -1,4 +1,6 @@
-"""application script"""
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Application script."""
 import logging
 
 

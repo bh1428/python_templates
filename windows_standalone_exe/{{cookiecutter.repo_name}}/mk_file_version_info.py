@@ -1,4 +1,6 @@
-"""Create version info file"""
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""Create version info file."""
 import datetime as dt
 import re
 import os.path
