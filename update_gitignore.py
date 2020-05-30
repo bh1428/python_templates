@@ -6,7 +6,7 @@ import pathlib as pl
 import jinja2
 import requests
 
-__version__ = "2020.5.17"
+__version__ = "2020.5.30"
 
 template_file = "dot_gitignore.jinja2"
 
@@ -16,6 +16,7 @@ sources = {
 }
 
 targets = {
+    pl.Path("windows_qt") / "{{cookiecutter.repo_name}}" / ".gitignore",
     pl.Path("windows_standalone_exe") / "{{cookiecutter.repo_name}}" / ".gitignore",
     pl.Path("windows_vsc") / "{{cookiecutter.repo_name}}" / ".gitignore",
 }

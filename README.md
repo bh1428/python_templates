@@ -1,17 +1,30 @@
 # Python Templates for Windows projects
 
 ## Templates
-This repository contains templates for Python development projects (on Windows):
-  * __windows_standalone_exe__: standalone (Windows) executable using venv (pip-tools), VSCode, make and pyinstaller (with a working example how the combination of `click`, `logging` (both to file and console) and `pyinstaller` can be used)
-  * __windows_vsc__: basic (Windows) VSCode template using venv (pip-tools), VSCode and make
+This repository contains [Cookiecutter](https://cookiecutter.readthedocs.io/) templates for Python development projects (on Windows). All templates use a combination of make with [pip-tools](https://pypi.org/project/pip-tools/) to manage a virtual environment):
+  * __windows_qt__: basic Qt / PySide2 application (using VSCode)
+  * __windows_standalone_exe__: standalone (Windows) executable (with a working example how the combination of `click`, `logging` (both to file and console) and `pyinstaller` can be used)
+  * __windows_vsc__: basic (Windows) VSCode template
 
-The templates are based on a [pip-tools](https://pypi.org/project/pip-tools/) work flow with a defined Python version.
+
+##Visual Studio Code
+In case you want to use Visual Studio Code for Python development, the following set of extensions might be handy (in alphabetical order):
+  * Code Spell Checker
+  * ctags
+  * Git History
+  * Material Icon Theme
+  * Python
+  * Python Docstring Generator
+  * reStructuredText
+  * SQLite
+  * Visual Studio IntelliCode
+
 
 ## make
-Templates 'abuse' `make` for managing the virtual environment and/or building an executable. In case you need `make` for Windows: use [GnuWin](http://gnuwin32.sourceforge.net/). You can either install the entire set or just [make](http://gnuwin32.sourceforge.net/packages/make.htm). In fact, you only need these files (unpack form the zips and put them somewhere in your path):
-  * From the [Binaries](http://gnuwin32.sourceforge.net/downlinks/make-bin-zip.php) zip:
+Templates 'abuse' `make` for managing the virtual environment and/or building an executable. In case you need `make` for Windows: use [GnuWin](http://gnuwin32.sourceforge.net/). You can either install the entire set or just [make](http://gnuwin32.sourceforge.net/packages/make.htm). In fact, you only need these files (unpack from the zips and put them somewhere in your path):
+  * [Binaries](http://gnuwin32.sourceforge.net/downlinks/make-bin-zip.php) zip:
       * `bin/make.exe`
-  * From the [Dependencies](http://gnuwin32.sourceforge.net/downlinks/make-dep-zip.php) zip:
+  * [Dependencies](http://gnuwin32.sourceforge.net/downlinks/make-dep-zip.php) zip:
       * `bin/libiconv2.dll`
       * `bin/libintl3.dll`
 
