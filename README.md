@@ -1,10 +1,10 @@
 # Python Templates for Windows projects
 
 ## Templates
-This repository contains [Cookiecutter](https://cookiecutter.readthedocs.io/) templates for Python development projects (on Windows). All templates use a combination of make with [pip-tools](https://pypi.org/project/pip-tools/) to manage a virtual environment):
-  * __windows_qt__: basic Qt / PySide2 application (using VSCode)
-  * __windows_standalone_exe__: standalone (Windows) executable (with a working example how the combination of `click`, `logging` (both to file and console) and `pyinstaller` can be used)
-  * __windows_vsc__: basic (Windows) VSCode template
+This repository contains [Cookiecutter](https://cookiecutter.readthedocs.io/) templates for Python development projects (on Windows). All templates use a combination of make with [pip-tools](https://pypi.org/project/pip-tools/) to manage a virtual environment:
+  * __windows_qt__: basic Qt / PySide2 application (using VSCode and QT Designer)
+  * __windows_standalone_exe__: standalone (Windows) executable (with an example how the combination of `click`, `logging` (both to file and console) and `pyinstaller` can be used)
+  * __windows_vsc__: basic VSCode template
 
 
 ## Visual Studio Code
