@@ -7,7 +7,7 @@ This repository contains [Cookiecutter](https://cookiecutter.readthedocs.io/) te
   * __windows_vsc__: basic (Windows) VSCode template
 
 
-##Visual Studio Code
+## Visual Studio Code
 In case you want to use Visual Studio Code for Python development, the following set of extensions might be handy (in alphabetical order):
   * Code Spell Checker
   * ctags
