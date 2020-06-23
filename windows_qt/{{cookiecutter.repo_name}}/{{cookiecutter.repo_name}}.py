@@ -6,7 +6,7 @@ from PySide2 import QtCore, QtWidgets
 
 from {{cookiecutter.repo_name}}_ui import Ui_MainWindow
 
-__version__ = "2020.5.30"
+__version__ = "{{cookiecutter.version}}"
 
 
 class MainWindow(QtWidgets.QMainWindow):
