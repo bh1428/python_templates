@@ -9,7 +9,7 @@ import time
 
 import click
 
-__version__ = "2020.3.27"
+__version__ = "2020.6.24"
 
 # constants
 COMPANY = "My Company"
@@ -145,7 +145,7 @@ def create_version_resource_file(product, version, company, copyright_years):
     default=VERSION_RESOURCE_FILENAME,
     help=f"name of the Version Resource file (default: '{VERSION_RESOURCE_FILENAME}')",
 )
-@click.version_option(version=__version__, message=f"%(prog)s V%(version)s")
+@click.version_option(version=__version__, message="%(prog)s V%(version)s")
 def click_main(py_script, company, copyright_years, out):
     """Create a Version Resource file for 'pyi-set_version' (pyinstaller).
 
