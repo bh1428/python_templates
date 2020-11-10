@@ -3,6 +3,7 @@
 #
 
 # Make targets (can be used when calling make):
+#   init                  alias for initial setup of virtual env
 #   upgrade_pip_tools     upgrade pip and the pip-tools package
 #   upgrade_requirements  upgrade *requirements.txt files without installing
 #   upgrade_venv          upgrade pip-tools, *requirements.txt and install packages
@@ -17,7 +18,7 @@ VENV_CLEAN_DIRS := .mypy_cache __pycache__
 
 # binaries / executables
 CMD := "C:\Windows\System32\cmd.exe"
-PYTHON := "C:\Program Files\Python38\python.exe"
+PYTHON := "C:\Program Files\Python39\python.exe"
 VENV := .\$(VENV_DIR)\Scripts
 VENV_ACTIVATE := $(VENV)\activate.bat
 VENV_PYTHON := $(VENV)\python.exe
@@ -29,9 +30,12 @@ all: build
 
 .NOTPARALLEL:
 
+init: $(VENV_ACTIVATE)
+
 $(VENV_ACTIVATE):
 	$(PYTHON) -m venv $(VENV_DIR)
 	$(VENV_PYTHON) -m pip install pip --upgrade
+	$(VENV_PYTHON) -m pip install wheel
 	$(VENV_PYTHON) -m pip install pip-tools
     ifeq (,$(wildcard requirements.txt))
 		$(PIP_COMPILE) requirements.in
