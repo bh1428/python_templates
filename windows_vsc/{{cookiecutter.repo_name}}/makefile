@@ -34,6 +34,7 @@ init: $(VENV_ACTIVATE)
 $(VENV_ACTIVATE):
 	$(PYTHON) -m venv $(VENV_DIR)
 	$(VENV_PYTHON) -m pip install pip --upgrade
+	$(VENV_PYTHON) -m pip install wheel
 	$(VENV_PYTHON) -m pip install pip-tools
     ifeq (,$(wildcard requirements.txt))
 		$(PIP_COMPILE) requirements.in
