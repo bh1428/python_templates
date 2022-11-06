@@ -1,6 +1,7 @@
 """application script"""
 import logging
 
+
 def main(divisor):
     """Simple main function with logging and options to generate an exception
 
@@ -12,13 +13,13 @@ def main(divisor):
         0 to signal that execution has finished successfully
     """
     logger = logging.getLogger(__name__)
-    logger.critical('we are in main (CRITICAL)')
-    logger.error('we are in main (ERROR)')
-    logger.warning('we are in main (WARNING)')
-    logger.info('we are in main (INFO)')
-    logger.debug('we are in main (DEBUG)')
+    logger.critical("we are in main (CRITICAL)")
+    logger.error("we are in main (ERROR)")
+    logger.warning("we are in main (WARNING)")
+    logger.info("we are in main (INFO)")
+    logger.debug("we are in main (DEBUG)")
 
     # divide: opportunity to trigger a ZeroDivisionError exception
-    logger.info(f'1 / {divisor} = {1 / divisor}')
+    logger.info(f"1 / {divisor} = {1 / divisor}")
 
     return 0
