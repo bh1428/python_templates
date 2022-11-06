@@ -18,7 +18,7 @@ VENV_CLEAN_DIRS := .mypy_cache __pycache__
 
 # binaries / executables
 CMD := "C:\Windows\System32\cmd.exe"
-PYTHON := "C:\Program Files\Python39\python.exe"
+PYTHON := "C:\Program Files\Python310\python.exe"
 VENV := .\$(VENV_DIR)\Scripts
 VENV_ACTIVATE := $(VENV)\activate.bat
 VENV_PYTHON := $(VENV)\python.exe
