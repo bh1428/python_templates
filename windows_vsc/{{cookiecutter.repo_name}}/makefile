@@ -2,19 +2,7 @@
 # makefile for Visual Studio Code (VSC) based Python projects
 #
 
-# Version: 2020.4.16
-
-# Start new project:
-#  1) Copy template folder to a new folder (rename).
-#  2) Execute (in the new folder): make
-
-# You now have a virtual environment you can use with Visual Studio Code
-# to develop new scripts.
-
 # Make targets (can be used when calling make):
-#   venv                  create new virtual environment, if the
-#                         *requirements.txt files already exists they will be
-#                         used, otherwise new ones will be created
 #   upgrade_pip_tools     upgrade pip and the pip-tools package
 #   upgrade_requirements  upgrade *requirements.txt files without installing
 #   upgrade_venv          upgrade pip-tools, *requirements.txt and install packages
@@ -28,7 +16,7 @@ VENV_CLEAN_DIRS := .mypy_cache __pycache__
 
 # binaries / executables
 CMD := "C:\Windows\System32\cmd.exe"
-PYTHON := "C:\Program Files\Python38\python.exe"
+PYTHON := "{{ cookiecutter.python_path }}"
 VENV := .\$(VENV_DIR)\Scripts
 VENV_ACTIVATE := $(VENV)\activate.bat
 VENV_PYTHON := $(VENV)\python.exe
