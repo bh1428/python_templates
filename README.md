@@ -15,16 +15,18 @@ You can use the PowerShell script `cookiecutter.ps1` to create new projects from
 
 ## Visual Studio Code
 In case you want to use Visual Studio Code for Python development, the following set of extensions might be handy (in alphabetical order):
+  * autoDocstring
   * Code Spell Checker
   * ctags
+  * Git Graph
   * Git History
+  * GitLens
   * Material Icon Theme
   * Pylance
   * Python
-  * Python Docstring Generator
-  * reStructuredText
   * SQLite
   * Visual Studio IntelliCode
+  * XML Tools
 
 ## make
 Templates 'abuse' `make` for managing the virtual environment and/or building an executable. In case you need `make` for Windows: use [GnuWin](http://gnuwin32.sourceforge.net/). You can either install the entire set or just [make](http://gnuwin32.sourceforge.net/packages/make.htm). In fact, you only need these files (unpack from the zips and put them somewhere in your path):
