@@ -9,7 +9,7 @@ This repository contains [Cookiecutter](https://cookiecutter.readthedocs.io/) te
 You can use the PowerShell script `cookiecutter.ps1` to create new projects from the templates:
   - Copy `cookiecutter.ps1` to your main project directory (projects will be created as sub-directories).
   - Adapt configuration in `cookiecutter.ps1`:
-    * `COOKIECUTTER`: location of the `cookiecutter.exe` executable
+    * `COOKIECUTTER`: location of the `cookiecutter.exe` executable (must be somewhere installed in a Python (virtual) environment)
     * `TEMPLATE_DIRS`: templates should be sub-directories of this folder
   - Run `cookiecutter.ps1` and use the menu to select the template
 
