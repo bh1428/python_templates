@@ -4,7 +4,7 @@
 import logging
 
 
-def main(divisor):
+def main(divisor: int) -> int:
     """Simple main function with logging and options to generate an exception
 
     Args:
@@ -22,6 +22,6 @@ def main(divisor):
     logger.debug("we are in main (DEBUG)")
 
     # divide: opportunity to trigger a ZeroDivisionError exception
-    logger.info(f"1 / {divisor} = {1 / divisor}")
+    logger.info("1 / %s = %s", divisor, 1 / divisor)
 
     return 0

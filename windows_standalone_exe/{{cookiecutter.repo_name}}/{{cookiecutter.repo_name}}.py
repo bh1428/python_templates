@@ -1,20 +1,23 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """Main script for {{cookiecutter.repo_name}}"""
+import copy
 import logging
 import logging.config
 import os
 import pathlib as pl
 import sys
+import typing as tp
 
 import click
 
 import application
 
-__version__ = "2020.5.26"
+__version__ = "2021.3.18"
 
 # logging configuration
-LOG_CONFIG = {
+LogConfigType = dict[str, tp.Union[tp.Any, dict[str, tp.Union[tp.Any, dict[str, tp.Any]]]]]
+LOG_CONFIG: LogConfigType = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
@@ -47,15 +50,15 @@ LOG_LEVELS = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]
 @click.option("-d", "--divisor", default=1, type=click.INT)
 @click.option("--logdir", default=".", type=click.Path(exists=True, writable=True), help="directory for the logfiles")
 @click.option("-l", "--loglevel", default="INFO", type=click.Choice(LOG_LEVELS))
-@click.version_option(version=__version__, message=f"%(prog)s V%(version)s")
-def click_main(divisor, logdir, loglevel):
+@click.version_option(version=__version__, message="%(prog)s V%(version)s")
+def click_main(divisor: int, logdir: str, loglevel: str) -> int:
     """Click template example
 
     The docstring entered here will be shown as part of the '--help' output.
     """
     # setup logger configuration
     script_name = pl.Path(sys.argv[0]).stem
-    log_config = LOG_CONFIG.copy()
+    log_config = copy.deepcopy(LOG_CONFIG)
     log_config["root"]["level"] = loglevel
     log_config["handlers"]["file"]["filename"] = pl.Path(logdir).joinpath(f"{script_name}.log")
     logging.config.dictConfig(log_config)
@@ -75,7 +78,7 @@ def click_main(divisor, logdir, loglevel):
     return_code = 0
     try:
         return_code = application.main(divisor)
-    except Exception:
+    except Exception:  # pylint: disable=broad-except
         logger.critical("caught unhandled exception", exc_info=True)
         return_code = 1
 
@@ -89,6 +92,7 @@ def click_main(divisor, logdir, loglevel):
 
 
 if __name__ == "__main__":
+    # pylint: disable=pointless-string-statement
     """Default main when called directly as a script.
 
     When called via this main the name of the script in UPPERCASE will be
@@ -104,12 +108,12 @@ if __name__ == "__main__":
       1 - error / uncaught exception
       2 - issue with arguments
     """
-    script_name = pl.Path(__file__).stem.upper()
+    SCRIPT_NAME = pl.Path(__file__).stem.upper()
     try:
         # pylint: disable=no-value-for-parameter, unexpected-keyword-arg
-        return_code = click_main(standalone_mode=False, auto_envvar_prefix=script_name)
+        RETURN_CODE = click_main(standalone_mode=False, auto_envvar_prefix=SCRIPT_NAME)
     except click.ClickException as exc:
         # standalone mode ignores exception: catch them anyway and give meaningful error
         exc.show()
-        return_code = exc.exit_code
-    sys.exit(return_code)
+        RETURN_CODE = exc.exit_code
+    sys.exit(RETURN_CODE)

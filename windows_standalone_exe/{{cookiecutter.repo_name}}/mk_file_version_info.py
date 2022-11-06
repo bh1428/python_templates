@@ -9,15 +9,15 @@ import time
 
 import click
 
-__version__ = "2020.6.24"
+__version__ = "2022.3.18"
 
 # constants
 COMPANY = "My Company"
-COPYRIGHT_YEARS = f"2020-{dt.datetime.now():%Y}"
+COPYRIGHT_START = "2020"
 VERSION_RESOURCE_FILENAME = "file_version_info.txt"
 
 
-def _mk_version_tuple(version):
+def _mk_version_tuple(version: str) -> tuple[str, str]:
     """Create a version tuple as required by a version info file.
 
     Note: non-numeric parts of the version are stripped entirely and
@@ -36,16 +36,16 @@ def _mk_version_tuple(version):
             '1.2.3.4'  -> ('1.2.3', '(1, 2, 3, 4)')
             '1..3.4'   -> ('1.0.3', '(1, 0, 3, 4)')
     """
-    version = [re.sub("[^0-9]", "", n) for n in version.split(".")[:4]]
-    version = [int(n) if n else 0 for n in version]
-    if len(version) < 4:
-        version.extend([0] * (4 - len(version)))
-    version_text = ".".join([str(n) for n in version[:3]])
-    version_tuple = ", ".join([str(n) for n in version])
+    version_lst = [re.sub("[^0-9]", "", n) for n in version.split(".")[:4]]
+    version_ints = [int(n) if n else 0 for n in version_lst]
+    if len(version_ints) < 4:
+        version_ints.extend([0] * (4 - len(version_ints)))
+    version_text = ".".join([str(n) for n in version_ints[:3]])
+    version_tuple = ", ".join([str(n) for n in version_ints])
     return version_text, f"({version_tuple})"
 
 
-def create_version_resource_file(product, version, company, copyright_years):
+def create_version_resource_file(product: str, version: str, company: str, copyright_years: str) -> str:
     """Create a Windows Version Resource File.
 
     The Version Info File is usable for `pyi-set_version` contained in
@@ -135,9 +135,9 @@ def create_version_resource_file(product, version, company, copyright_years):
 @click.argument("py_script")
 @click.option("--company", default=COMPANY, help=f"company for Version Resource (default: '{COMPANY}'")
 @click.option(
-    "--copyright_years",
-    default=COPYRIGHT_YEARS,
-    help=f"years for the copyright statement (default: '{COPYRIGHT_YEARS}'",
+    "--copyright_start",
+    default=COPYRIGHT_START,
+    help=f"start year for the copyright statement (default: '{COPYRIGHT_START}'",
 )
 @click.option(
     "-o",
@@ -146,7 +146,7 @@ def create_version_resource_file(product, version, company, copyright_years):
     help=f"name of the Version Resource file (default: '{VERSION_RESOURCE_FILENAME}')",
 )
 @click.version_option(version=__version__, message="%(prog)s V%(version)s")
-def click_main(py_script, company, copyright_years, out):
+def click_main(py_script: str, company: str, copyright_start: int, out: str) -> None:
     """Create a Version Resource file for 'pyi-set_version' (pyinstaller).
 
     PY_SCRIPT: name of the script for which to create a Version Resource file
@@ -154,7 +154,7 @@ def click_main(py_script, company, copyright_years, out):
     # read the version from the python script
     re_version = re.compile(r"^\s*__version__\s*\=\s*(\'|\")(?P<version>[^.]+\.[^.]+\.[^.]+)(\'|\")")
     version = None
-    with open(py_script) as fh_in:
+    with open(py_script, encoding="UTF-8") as fh_in:
         for line in fh_in:
             match = re_version.match(line)
             if match:
@@ -166,6 +166,9 @@ def click_main(py_script, company, copyright_years, out):
 
     # determine product
     product = os.path.splitext(os.path.split(py_script)[-1])[0]
+
+    # adapt copyright years
+    copyright_years = f"{copyright_start}-{dt.datetime.now():%Y}"
 
     # create version resource file
     version_resource_file = create_version_resource_file(product, version, company, copyright_years)
