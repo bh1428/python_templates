@@ -1,0 +1,10 @@
+{
+    "repo_name": "package",
+    "package_name": "{{ cookiecutter.repo_name }}",
+    "package_version": "0.1",
+    "package_description": "Package description",
+    "copyright_author": "Ben Hattem",
+    "author_email": "benghattem@gmail.com",
+    "copyright_year": "{% now 'utc', '%Y' %}",
+    "python_path": "C:\\Program Files\\Python39\\python.exe"
+}

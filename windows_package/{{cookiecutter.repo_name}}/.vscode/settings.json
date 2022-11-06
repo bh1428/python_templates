@@ -1,0 +1,24 @@
+{
+    "python.linting.enabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length=120"
+    ],
+    "python.linting.pylintEnabled": true,
+    "python.linting.mypyEnabled": true,
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length=120"
+    ],
+    "cSpell.enabled": true,
+    "python.linting.pylintArgs": [
+        "--max-line-length=120"
+    ],
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.defaultInterpreterPath": "${workspaceFolder}\\venv\\Scripts\\python.exe"
+}
