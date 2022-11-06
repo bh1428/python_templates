@@ -20,7 +20,6 @@ ifeq ($(OS),Windows_NT)
 	# Windows
 	CMD := "C:\Windows\System32\cmd.exe"
 	PYTHON := "C:\Program Files\Python310\python.exe"
-	VENV_DIR := $(VENV_DIR)_win
 	VENV := .\$(VENV_DIR)\Scripts
 	VENV_ACTIVATE := $(VENV)\activate.bat
 	VENV_PYTHON := $(VENV)\python.exe
@@ -30,7 +29,6 @@ ifeq ($(OS),Windows_NT)
 else
 	# Linux
 	PYTHON := "/usr/bin/python3.10"
-	VENV_DIR := $(VENV_DIR)_linux
 	VENV := ./$(VENV_DIR)/bin
 	VENV_ACTIVATE := $(VENV)/activate
 	VENV_PYTHON := $(VENV)/python
