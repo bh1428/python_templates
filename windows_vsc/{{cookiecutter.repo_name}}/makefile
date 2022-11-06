@@ -42,7 +42,7 @@ $(VENV_ACTIVATE):
     ifeq (,$(wildcard dev-requirements.txt))
 		$(PIP_COMPILE) dev-requirements.in
     endif
-	$(PIP_SYNC) dev-requirements.txt
+	$(PIP_SYNC) dev-requirements.txt --pip-args '--no-deps'
 
 requirements.txt: $(VENV_ACTIVATE) requirements.in
 	$(PIP_COMPILE) requirements.in
@@ -62,7 +62,7 @@ upgrade_requirements: $(VENV_ACTIVATE)
 
 .PHONY: sync
 sync: $(VENV_ACTIVATE) dev-requirements.txt
-	$(PIP_SYNC) dev-requirements.txt
+	$(PIP_SYNC) dev-requirements.txt --pip-args '--no-deps'
 
 .PHONY: upgrade_venv
 upgrade_venv: upgrade_pip_tools upgrade_requirements sync
