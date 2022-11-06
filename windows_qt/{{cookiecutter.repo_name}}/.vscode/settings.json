@@ -9,12 +9,12 @@
     "python.linting.mypyEnabled": true,
     "editor.formatOnSave": true,
     "python.formatting.provider": "black",
-    "python.pythonPath": "${workspaceFolder}\\venv\\Scripts\\python.exe",
     "python.formatting.blackArgs": [
         "--line-length=120"
     ],
     "cSpell.enabled": true,
     "python.linting.pylintArgs": [
         "--max-line-length=120"
-    ]
+    ],
+    "python.defaultInterpreterPath": "${workspaceFolder}\\venv\\Scripts\\python.exe"
 }
