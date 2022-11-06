@@ -2,7 +2,7 @@
 # makefile for windows_standalone_exe template
 #
 
-# Version: 2020.4.6
+# Version: 2020.4.11
 
 # Start new project:
 #  1) Copy template folder to a new folder (rename).
@@ -32,8 +32,9 @@
 #                         used, otherwise new ones will be created
 #   build                 create virtual environment (if required) and build
 #                         executable (this is the default target (all))
+#   upgrade_pip_tools     upgrade the pip-tools package
 #   upgrade_requirements  upgrade *requirements.txt files without installing
-#   upgrade_venv          upgrade *requirements.txt and install packages
+#   upgrade_venv          upgrade pip-tools, *requirements.txt and install packages
 #   sync                  synchronize venv with *requirements.txt
 #   info                  show list of installed packages in the venv
 #   clean                 remove all temporary files and directories
@@ -64,6 +65,8 @@ PIP_COMPILE := $(VENV)\pip-compile.exe
 PYINSTALLER := $(VENV)\pyinstaller.exe
 
 all: build
+
+.NOTPARALLEL:
 
 $(VENV_ACTIVATE):
 	$(PYTHON) -m venv $(VENV_DIR)
@@ -107,12 +110,11 @@ requirements.txt: $(VENV_ACTIVATE) requirements.in
 dev-requirements.txt: $(VENV_ACTIVATE) dev-requirements.in requirements.txt
 	$(PIP_COMPILE) dev-requirements.in
 
-.PHONY: upgrade_venv
-upgrade_venv: $(VENV_ACTIVATE)
-	$(PIP_COMPILE) requirements.in --upgrade
-	$(PIP_COMPILE) dev-requirements.in --upgrade
-	$(PIP_SYNC) dev-requirements.txt
-
+.PHONY: upgrade_pip_tools
+upgrade_pip_tools: $(VENV_ACTIVATE)
+	$(VENV_PYTHON) -m pip install --upgrade pip
+	$(PIP) install pip-tools --upgrade
+    
 .PHONY: upgrade_requirements
 upgrade_requirements: $(VENV_ACTIVATE)
 	$(PIP_COMPILE) requirements.in --upgrade
@@ -122,6 +124,9 @@ upgrade_requirements: $(VENV_ACTIVATE)
 sync: $(VENV_ACTIVATE) dev-requirements.txt
 	$(PIP_SYNC) dev-requirements.txt
 
+.PHONY: upgrade_venv
+upgrade_venv: upgrade_pip_tools upgrade_requirements sync
+    
 .PHONY: info
 info: $(VENV_ACTIVATE)
 	$(PIP) list
