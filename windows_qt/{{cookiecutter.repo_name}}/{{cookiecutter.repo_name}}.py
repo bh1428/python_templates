@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 import sys
 
-from PySide2 import QtCore, QtWidgets
+from PySide6 import QtCore, QtWidgets
 
 from {{cookiecutter.repo_name}}_ui import Ui_MainWindow
 
@@ -21,7 +21,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def on_action_about_triggered(self):
-        about_text = "<br>".join([f"<b>{{cookiecutter.repo_name}}</b> V{__version__}", "", "This is a PySide2 application."])
+        about_text = "<br>".join([f"<b>{{cookiecutter.repo_name}}</b> V{__version__}", "", "This is a PySide6 application."])
         QtWidgets.QMessageBox.about(self, "About", about_text)
 
     @QtCore.Slot()

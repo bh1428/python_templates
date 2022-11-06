@@ -34,9 +34,9 @@ VENV_PYTHON := $(VENV)\python.exe
 PIP := $(VENV)\pip.exe
 PIP_SYNC := $(VENV)\pip-sync.exe
 PIP_COMPILE := $(VENV)\pip-compile.exe
-PYSIDE2_UIC := $(VENV)\pyside2-uic.exe
-PYSIDE2_RCC := $(VENV)\pyside2-rcc.exe
-QT_DESIGNER := $(VENV_DIR)\Lib\site-packages\PySide2\designer.exe
+PYSIDE6_UIC := $(VENV)\pyside6-uic.exe
+PYSIDE6_RCC := $(VENV)\pyside6-rcc.exe
+QT_DESIGNER := $(VENV_DIR)\Lib\site-packages\PySide6\designer.exe
 
 all: build
 
@@ -49,8 +49,12 @@ $(VENV_ACTIVATE):
 	$(VENV_PYTHON) -m pip install pip --upgrade
 	$(VENV_PYTHON) -m pip install wheel
 	$(VENV_PYTHON) -m pip install pip-tools
-	$(CMD) /c "IF NOT EXIST requirements.txt $(PIP_COMPILE) requirements.in"
-	$(CMD) /c "IF NOT EXIST dev-requirements.txt $(PIP_COMPILE) dev-requirements.in"
+    ifeq (,$(wildcard requirements.txt))
+		$(PIP_COMPILE) requirements.in
+    endif
+    ifeq (,$(wildcard dev-requirements.txt))
+		$(PIP_COMPILE) dev-requirements.in
+    endif
 	$(PIP_SYNC) dev-requirements.txt --pip-args '--no-deps'
 
 requirements.txt: $(VENV_ACTIVATE) requirements.in
@@ -89,10 +93,10 @@ qt_designer: $(VENV_ACTIVATE)
 	$(QT_DESIGNER) $(SCRIPT_NAME).ui
 
 $(SCRIPT_NAME)_ui.py: $(SCRIPT_NAME).ui
-	$(PYSIDE2_UIC) -o $(SCRIPT_NAME)_ui.py $(SCRIPT_NAME).ui
+	$(PYSIDE6_UIC) -o $(SCRIPT_NAME)_ui.py $(SCRIPT_NAME).ui
 
 $(SCRIPT_NAME)_rc.py: $(SCRIPT_NAME).qrc $(ICON_NAME)
-	$(PYSIDE2_RCC) -o $(SCRIPT_NAME)_rc.py $(SCRIPT_NAME).qrc
+	$(PYSIDE6_RCC) -o $(SCRIPT_NAME)_rc.py $(SCRIPT_NAME).qrc
 
 .PHONY: run
 run: $(VENV_ACTIVATE) $(SCRIPT_NAME)_ui.py $(SCRIPT_NAME)_rc.py
