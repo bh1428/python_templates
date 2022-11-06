@@ -4,14 +4,14 @@
 import logging
 import logging.config
 import os
-import pathlib
+import pathlib as pl
 import sys
 
 import click
 
 import application
 
-__version__ = "2020.5.16"
+__version__ = "2020.5.26"
 
 # logging configuration
 LOG_CONFIG = {
@@ -54,15 +54,15 @@ def click_main(divisor, logdir, loglevel):
     The docstring entered here will be shown as part of the '--help' output.
     """
     # setup logger configuration
-    script_name = pathlib.Path(__file__).stem
+    script_name = pl.Path(sys.argv[0]).stem
     log_config = LOG_CONFIG.copy()
     log_config["root"]["level"] = loglevel
-    log_config["handlers"]["file"]["filename"] = pathlib.Path(logdir).joinpath(f"{script_name}.log")
+    log_config["handlers"]["file"]["filename"] = pl.Path(logdir).joinpath(f"{script_name}.log")
     logging.config.dictConfig(log_config)
 
     # initialize logging
     logger = logging.getLogger(__name__)
-    logger.info("starting '%s' V%s", pathlib.Path(sys.argv[0]).name, __version__)
+    logger.info("starting '%s' V%s", pl.Path(sys.argv[0]).name, __version__)
     if os.name == "nt":
         logger.info(
             "running on '%s' as user '%s\\%s'",
@@ -104,7 +104,7 @@ if __name__ == "__main__":
       1 - error / uncaught exception
       2 - issue with arguments
     """
-    script_name = pathlib.Path(__file__).stem.upper()
+    script_name = pl.Path(__file__).stem.upper()
     try:
         # pylint: disable=no-value-for-parameter, unexpected-keyword-arg
         return_code = click_main(standalone_mode=False, auto_envvar_prefix=script_name)
