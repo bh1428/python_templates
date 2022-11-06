@@ -13,6 +13,7 @@ In case you want to use Visual Studio Code for Python development, the following
   * ctags
   * Git History
   * Material Icon Theme
+  * Pylance
   * Python
   * Python Docstring Generator
   * reStructuredText
