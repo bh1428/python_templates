@@ -22,7 +22,7 @@
 #   upgrade_requirements  upgrade *requirements.txt files without installing
 #   upgrade_venv          upgrade pip-tools, *requirements.txt and install packages
 #   sync                  synchronize venv with *requirements.txt
-#   info                  show list of installed packages in the venv
+#   list                  show list of installed packages in the venv
 #   clean                 remove all temporary files and directories
 #   clean_venv            remove virtual environment
 
@@ -119,8 +119,8 @@ sync: $(VENV_ACTIVATE) dev-requirements.txt
 .PHONY: upgrade_venv
 upgrade_venv: upgrade_pip_tools upgrade_requirements sync
 
-.PHONY: info
-info: $(VENV_ACTIVATE)
+.PHONY: list
+list: $(VENV_ACTIVATE)
 	$(PIP) list
 
 .PHONY: clean_venv
