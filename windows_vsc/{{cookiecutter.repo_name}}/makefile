@@ -15,15 +15,30 @@
 VENV_DIR := venv
 VENV_CLEAN_DIRS := .mypy_cache __pycache__
 
-# binaries / executables
-CMD := "C:\Windows\System32\cmd.exe"
-PYTHON := "{{ cookiecutter.python_path }}"
-VENV := .\$(VENV_DIR)\Scripts
-VENV_ACTIVATE := $(VENV)\activate.bat
-VENV_PYTHON := $(VENV)\python.exe
-PIP := $(VENV)\pip.exe
-PIP_SYNC := $(VENV)\pip-sync.exe
-PIP_COMPILE := $(VENV)\pip-compile.exe
+# executables for each supported OS
+ifeq ($(OS),Windows_NT)
+	# Windows
+	CMD := "C:\Windows\System32\cmd.exe"
+	PYTHON := "C:\Program Files\Python310\python.exe"
+	VENV_DIR := $(VENV_DIR)_win
+	VENV := .\$(VENV_DIR)\Scripts
+	VENV_ACTIVATE := $(VENV)\activate.bat
+	VENV_PYTHON := $(VENV)\python.exe
+	PIP := $(VENV)\pip.exe
+	PIP_SYNC := $(VENV)\pip-sync.exe
+	PIP_COMPILE := $(VENV)\pip-compile.exe
+else
+	# Linux
+	PYTHON := "/usr/bin/python3.10"
+	VENV_DIR := $(VENV_DIR)_linux
+	VENV := ./$(VENV_DIR)/bin
+	VENV_ACTIVATE := $(VENV)/activate
+	VENV_PYTHON := $(VENV)/python
+	PIP := $(VENV)/pip
+	PIP_SYNC := $(VENV)/pip-sync
+	PIP_COMPILE := $(VENV)/pip-compile
+endif
+
 
 all: sync
 
@@ -73,4 +88,8 @@ list: $(VENV_ACTIVATE)
 
 .PHONY: clean
 clean:
-	$(CMD) /c "FOR %%F IN ($(VENV_DIR) $(VENV_CLEAN_DIRS)) DO IF EXIST %%F rmdir /q /s %%F"
+    ifeq ($(OS),Windows_NT)
+		$(CMD) /c "FOR %%F IN ($(VENV_DIR) $(VENV_CLEAN_DIRS)) DO IF EXIST %%F rmdir /q /s %%F"
+    else
+		rm -rf $(VENV_DIR) $(VENV_CLEAN_DIRS)
+    endif
