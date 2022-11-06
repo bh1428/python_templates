@@ -47,6 +47,7 @@ init: $(VENV_ACTIVATE)
 $(VENV_ACTIVATE):
 	$(PYTHON) -m venv $(VENV_DIR)
 	$(VENV_PYTHON) -m pip install pip --upgrade
+	$(VENV_PYTHON) -m pip install wheel
 	$(VENV_PYTHON) -m pip install pip-tools
 	$(CMD) /c "IF NOT EXIST requirements.txt $(PIP_COMPILE) requirements.in"
 	$(CMD) /c "IF NOT EXIST dev-requirements.txt $(PIP_COMPILE) dev-requirements.in"
