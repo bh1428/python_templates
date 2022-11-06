@@ -3,6 +3,7 @@
 #
 
 # Make targets (can be used when calling make):
+#   init                  alias for initial setup of virtual env
 #   upgrade_pip_tools     upgrade pip and the pip-tools package
 #   upgrade_requirements  upgrade *requirements.txt files without installing
 #   upgrade_venv          upgrade pip-tools, *requirements.txt and install packages
@@ -27,6 +28,8 @@ PIP_COMPILE := $(VENV)\pip-compile.exe
 all: sync
 
 .NOTPARALLEL:
+
+init: $(VENV_ACTIVATE)
 
 $(VENV_ACTIVATE):
 	$(PYTHON) -m venv $(VENV_DIR)

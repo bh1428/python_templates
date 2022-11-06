@@ -15,6 +15,7 @@
 #  8) If all goes well: .exe will be in the 'dist' directory.
 
 # Make targets (can be used when calling make):
+#   init                  alias for initial setup of virtual env
 #   build                 create virtual environment (if required) and build
 #                         executable (this is the default target (all))
 #   upgrade_pip_tools     upgrade pip and the pip-tools package
@@ -52,6 +53,8 @@ PYINSTALLER := $(VENV)\pyinstaller.exe
 all: build
 
 .NOTPARALLEL:
+
+init: $(VENV_ACTIVATE)
 
 $(VENV_ACTIVATE):
 	$(PYTHON) -m venv $(VENV_DIR)

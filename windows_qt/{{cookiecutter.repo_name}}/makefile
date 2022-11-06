@@ -3,6 +3,7 @@
 #
 
 # Make targets:
+#   init                  alias for initial setup of virtual env
 #   upgrade_pip_tools     upgrade pip and the pip-tools package
 #   upgrade_requirements  upgrade *requirements.txt files without installing
 #   upgrade_venv          upgrade pip-tools, *requirements.txt and install packages
@@ -40,6 +41,8 @@ QT_DESIGNER := $(VENV_DIR)\Lib\site-packages\PySide2\designer.exe
 all: build
 
 .NOTPARALLEL:
+
+init: $(VENV_ACTIVATE)
 
 $(VENV_ACTIVATE):
 	$(PYTHON) -m venv $(VENV_DIR)
