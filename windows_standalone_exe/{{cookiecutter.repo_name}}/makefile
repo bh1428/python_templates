@@ -88,10 +88,9 @@ build_exe: $(VENV_ACTIVATE) pre_build_exe
 
 .PHONY: post_build_exe
 post_build_exe: build_exe
-	$(VENV_PYTHON) -c "import sys; import datetime; print(f'Python {sys.version}'); print(f'Build time: {datetime.datetime.now().astimezone()}\n')" > build_info.txt
+	$(VENV_PYTHON) -c "import sys; import datetime; print(f'Python {sys.version}'); print(f'Build time: {datetime.datetime.now().astimezone()}\n')" > $(BUILD_INFO)
 	$(PIP) list >> $(BUILD_INFO)
 	$(VENV_PYTHON) $(SCRIPT_NAME).py --help > $(CMDLINE_OPTIONS)
-	$(CMD) /c copy build_info.txt dist
 	$(CMD) /c "FOR %%F IN ($(EXTRA_FILES)) DO IF EXIST "%%F" copy "%%F" dist"
 	$(CMD) /c "FOR %%F IN ($(POST_BUILD_CLEAN_DIRS)) DO IF EXIST %%F rmdir /q /s %%F"
 	$(CMD) /c "FOR %%F IN ($(POST_BUILD_CLEAN_FILES)) DO IF EXIST %%F del %%F"
