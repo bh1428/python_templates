@@ -1,6 +1,7 @@
 # Use cookiecutter to create a project from a template
 #
 # V1.0   2022-03-03 initial version
+# V1.1   2022-03-18 add 'x' (exit) option to menu
 
 #
 # CONFIGURATION
@@ -43,7 +44,8 @@ function Get-MenuSelection {
         [String[]]$MenuItems,
         [String]$MenuPrompt,
         [switch]$ChooseByFirstLetter,
-        [switch]$ExitWithX
+        [switch]$ExitWithX,
+        [int]$Selected = 0
     )
 
     # get mapping from (lowercase) first key to item
@@ -56,7 +58,12 @@ function Get-MenuSelection {
 
     # store initial cursor position
     $cursorPosition = $host.UI.RawUI.CursorPosition
-    $pos = 0 # current item selection
+    $pos = $Selected # current item selection
+    if ($pos -lt 0) {
+        $pos = 0
+    } elseif ($pos -ge $MenuItems.Count) {
+        $pos = $MenuItems.Count - 1
+    }
 
     function Write-Menu {
         param (
@@ -117,7 +124,7 @@ function Read-AnyKey {
     $ignore = 9, 16, 17, 18, 20, 91, 92, 93, 144, 145, 166, 167, 168, 169, `
         170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183
     $keyPress = $null
-    while ($keyPress.VirtualKeyCode -eq $null -or $ignore -contains $keyPress.VirtualKeyCode) {
+    while ($null -eq $keyPress.VirtualKeyCode -or $ignore -contains $keyPress.VirtualKeyCode) {
         $keyPress = $Host.UI.RawUI.ReadKey('NoEcho, IncludeKeyDown')
     }
     Write-Host
@@ -217,8 +224,8 @@ function Show-MainMenu {
     $exitNotChosen = $true
     while ($exitNotChosen) {
         clear
-        $choice = Get-MenuSelection -MenuItems $Menu.Keys -MenuPrompt 'Create project from cookiecutter template:'
-        if ($Menu[$choice] -eq 'EXIT') {
+        $choice = Get-MenuSelection -MenuItems $Menu.Keys -MenuPrompt 'Create project from cookiecutter template (''x'' to exit):' -ExitWithX
+        if (($null -eq $choice) -or ($Menu[$choice] -eq 'EXIT')) {
             $exitNotChosen = $false
         } else {
             Invoke-Cookiecutter -Template $Menu[$choice] -Config $Config
