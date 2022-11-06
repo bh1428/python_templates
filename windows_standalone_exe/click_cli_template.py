@@ -1,0 +1,112 @@
+"""cli template using click (with logging)"""
+import logging
+import logging.config
+import os
+import pathlib
+import sys
+
+import click
+
+import application
+
+__version__ = "2020.3.25"
+
+# logging configuration
+LOG_CONFIG = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {"format": "%(asctime)s %(levelname)s %(message)s"},
+        "precise": {"format": "[%(asctime)s] [%(levelname)s] [%(name)s.%(funcName)s] %(message)s"},
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "DEBUG",
+            "formatter": "simple",
+            "stream": "ext://sys.stdout",
+        },
+        "file": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "level": "DEBUG",
+            "formatter": "precise",
+            "filename": "application.log",
+            "when": "W6",
+            "backupCount": 4,
+        },
+    },
+    "root": {"level": "DEBUG", "handlers": ["console", "file"]},
+}
+
+LOG_LEVELS = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]
+
+
+@click.command()
+@click.option("-d", "--divisor", default=1, type=click.INT)
+@click.option("--logdir", default=".", type=click.Path(exists=True, writable=True), help="directory for the logfiles")
+@click.option("-l", "--loglevel", default="INFO", type=click.Choice(LOG_LEVELS))
+@click.version_option(version=__version__, message=f"%(prog)s V%(version)s")
+def click_main(divisor, logdir, loglevel):
+    """Click template example
+
+    The docstring entered here will be shown as part of the '--help' output.
+    """
+    # setup logger configuration
+    script_name = pathlib.Path(__file__).stem
+    log_config = LOG_CONFIG.copy()
+    log_config["root"]["level"] = loglevel
+    log_config["handlers"]["file"]["filename"] = pathlib.Path(logdir).joinpath(f"{script_name}.log")
+    logging.config.dictConfig(log_config)
+
+    # initialize logging
+    logger = logging.getLogger(__name__)
+    logger.info("starting '%s' V%s", pathlib.Path(sys.argv[0]).name, __version__)
+    if os.name == "nt":
+        logger.info(
+            "running on '%s' as user '%s\\%s'",
+            os.environ["COMPUTERNAME"],
+            os.environ["USERDOMAIN"],
+            os.environ["USERNAME"],
+        )
+
+    # execute main
+    return_code = 0
+    try:
+        return_code = application.main(divisor)
+    except Exception:
+        logger.critical("caught unhandled exception", exc_info=True)
+        return_code = 1
+
+    # exit with an informal or an error message
+    msg = f"exit with returncode={return_code}"
+    if return_code == 0:
+        logger.info(msg)
+    else:
+        logger.error(msg)
+    return return_code
+
+
+if __name__ == "__main__":
+    """Default main when called directly as a script.
+
+    When called via this main the name of the script in UPPERCASE will be
+    used as an environment prefix for configuration variables, so you can
+    enter options via command line arguments or via environment variables.
+    For example: when the script is called cli.py you can use a environment
+    variable like CLI_LOGDIR to set the directory for logfiles. Note: if you
+    do this you should not use quotes (") surrounding paths (the content of
+    environment variables can contains spaces).
+
+    The returncode convention is:
+      0 - normal exit
+      1 - error / uncaught exception
+      2 - issue with arguments
+    """
+    script_name = pathlib.Path(__file__).stem.upper()
+    try:
+        return_code = click_main(standalone_mode=False, auto_envvar_prefix=script_name)
+    except click.ClickException as exc:
+        # standalone mode ignores exception: catch them anyway and give meaningful error
+        exc.show()
+        return_code = exc.exit_code
+    sys.exit(return_code)
