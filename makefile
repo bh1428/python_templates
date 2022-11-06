@@ -49,7 +49,6 @@ upgrade_pip_tools: $(VENV_ACTIVATE)
 .PHONY: upgrade_requirements
 upgrade_requirements: $(VENV_ACTIVATE)
 	$(PIP_COMPILE) requirements.in --upgrade
-	$(PIP_COMPILE) dev-requirements.in --upgrade
 
 .PHONY: sync
 sync: $(VENV_ACTIVATE) requirements.txt
