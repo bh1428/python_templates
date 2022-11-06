@@ -20,5 +20,8 @@
         "flags'r",
         "pyinstaller",
         "pylint"
+    ],
+    "python.linting.pylintArgs": [
+        "--max-line-length=120"
     ]
 }

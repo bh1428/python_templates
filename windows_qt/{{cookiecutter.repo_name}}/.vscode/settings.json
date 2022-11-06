@@ -13,5 +13,8 @@
     "python.formatting.blackArgs": [
         "--line-length=120"
     ],
-    "cSpell.enabled": true
+    "cSpell.enabled": true,
+    "python.linting.pylintArgs": [
+        "--max-line-length=120"
+    ]
 }
