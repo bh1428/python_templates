@@ -28,7 +28,6 @@
 
 # script properties
 SCRIPT_NAME := {{cookiecutter.repo_name}}
-EXTRA_FILES :=
 ICON_FILE := images/python.ico
 
 # names (directories & files)
@@ -38,6 +37,9 @@ PRE_BUILD_CLEAN_DIRS := build dist
 PRE_BUILD_CLEAN_FILES := $(SCRIPT_NAME).spec $(SCRIPT_NAME)_info.txt
 POST_BUILD_CLEAN_DIRS := build
 POST_BUILD_CLEAN_FILES :=
+BUILD_INFO := build_info.txt
+CMDLINE_OPTIONS := cmdline_options.txt
+EXTRA_FILES := $(BUILD_INFO) $(CMDLINE_OPTIONS)
 
 # binaries / executables
 CMD := "C:\Windows\System32\cmd.exe"
@@ -87,7 +89,8 @@ build_exe: $(VENV_ACTIVATE) pre_build_exe
 .PHONY: post_build_exe
 post_build_exe: build_exe
 	$(VENV_PYTHON) -c "import sys; import datetime; print(f'Python {sys.version}'); print(f'Build time: {datetime.datetime.now().astimezone()}\n')" > build_info.txt
-	$(PIP) list >> build_info.txt
+	$(PIP) list >> $(BUILD_INFO)
+	$(VENV_PYTHON) $(SCRIPT_NAME).py --help > $(CMDLINE_OPTIONS)
 	$(CMD) /c copy build_info.txt dist
 	$(CMD) /c "FOR %%F IN ($(EXTRA_FILES)) DO IF EXIST "%%F" copy "%%F" dist"
 	$(CMD) /c "FOR %%F IN ($(POST_BUILD_CLEAN_DIRS)) DO IF EXIST %%F rmdir /q /s %%F"
