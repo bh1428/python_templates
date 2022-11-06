@@ -6,13 +6,13 @@ import pathlib as pl
 import jinja2
 import requests
 
-__version__ = "2020.5.30"
+__version__ = "2022.3.3"
 
 template_file = "dot_gitignore.jinja2"
 
 sources = {
-    "python_gitignore": "https://github.com/github/gitignore/raw/master/Python.gitignore",
-    "vscode_gitignore": "https://github.com/github/gitignore/raw/master/Global/VisualStudioCode.gitignore",
+    "python_gitignore": "https://raw.githubusercontent.com/github/gitignore/main/Python.gitignore",
+    "vscode_gitignore": "https://raw.githubusercontent.com/github/gitignore/main/Global/VisualStudioCode.gitignore",
 }
 
 targets = {
@@ -43,6 +43,6 @@ print(f"done")
 # update .gitignore files
 for target in targets:
     with open(target, "w", encoding="utf-8") as fh_out:
-        print(f"Writing: '{target}'...", end="")
+        print(f"Writing: '{target}'... ", end="")
         fh_out.write(dot_gitignore)
         print("done")
