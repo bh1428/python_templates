@@ -31,7 +31,9 @@ VENV_ACTIVATE := $(VENV)\activate.bat
 VENV_PYTHON := $(VENV)\python.exe
 PIP := $(VENV)\pip.exe
 PIP_SYNC := $(VENV)\pip-sync.exe
+PIP_SYNC_OPTIONS := --pip-args '--no-deps'
 PIP_COMPILE := $(VENV)\pip-compile.exe
+PIP_COMPILE_OPTIONS := --resolver=backtracking
 PYTEST := $(VENV)\pytest.exe
 
 
@@ -47,12 +49,12 @@ $(VENV_ACTIVATE):
 	$(VENV_PYTHON) -m pip install wheel
 	$(VENV_PYTHON) -m pip install pip-tools
     ifeq (,$(wildcard requirements.txt))
-		$(PIP_COMPILE) requirements.in
+		$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) requirements.in
     endif
     ifeq (,$(wildcard dev-requirements.txt))
-		$(PIP_COMPILE) dev-requirements.in
+		$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) dev-requirements.in
     endif
-	$(PIP_SYNC) dev-requirements.txt --pip-args '--no-deps'
+	$(PIP_SYNC) $(PIP_SYNC_OPTIONS) dev-requirements.txt
 	$(PIP) install -e .
 
 .PHONY: build
@@ -79,10 +81,10 @@ coverage: $(VENV_ACTIVATE)
 	$(CMD) /c start $(COVERAGE_HTML)\index.html
 
 requirements.txt: $(VENV_ACTIVATE) requirements.in
-	$(PIP_COMPILE) requirements.in
+	$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) requirements.in
 
 dev-requirements.txt: $(VENV_ACTIVATE) dev-requirements.in requirements.txt
-	$(PIP_COMPILE) dev-requirements.in
+	$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) dev-requirements.in
 
 .PHONY: upgrade_pip_tools
 upgrade_pip_tools: $(VENV_ACTIVATE)
@@ -91,12 +93,12 @@ upgrade_pip_tools: $(VENV_ACTIVATE)
 
 .PHONY: upgrade_requirements
 upgrade_requirements: $(VENV_ACTIVATE)
-	$(PIP_COMPILE) requirements.in --upgrade
-	$(PIP_COMPILE) dev-requirements.in --upgrade
+	$(PIP_COMPILE) --upgrade $(PIP_COMPILE_OPTIONS) requirements.in
+	$(PIP_COMPILE) --upgrade $(PIP_COMPILE_OPTIONS) dev-requirements.in
 
 .PHONY: sync
 sync: $(VENV_ACTIVATE) dev-requirements.txt
-	$(PIP_SYNC) dev-requirements.txt --pip-args '--no-deps'
+	$(PIP_SYNC) $(PIP_SYNC_OPTIONS) dev-requirements.txt
 
 .PHONY: upgrade_venv
 upgrade_venv: upgrade_pip_tools upgrade_requirements sync
