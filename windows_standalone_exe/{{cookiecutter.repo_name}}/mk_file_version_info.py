@@ -9,11 +9,11 @@ import time
 
 import click
 
-__version__ = "2022.3.18"
+__version__ = "2022.11.28"
 
 # constants
 COMPANY = "My Company"
-COPYRIGHT_START = "2020"
+COPYRIGHT_START = "2022"
 VERSION_RESOURCE_FILENAME = "file_version_info.txt"
 
 
@@ -168,7 +168,11 @@ def click_main(py_script: str, company: str, copyright_start: int, out: str) -> 
     product = os.path.splitext(os.path.split(py_script)[-1])[0]
 
     # adapt copyright years
-    copyright_years = f"{copyright_start}-{dt.datetime.now():%Y}"
+    current_year = dt.datetime.now().strftime("%Y")
+    if current_year == copyright_start:
+        copyright_years = f"{copyright_start}"
+    else:
+        copyright_years = f"{copyright_start}-{current_year}"
 
     # create version resource file
     version_resource_file = create_version_resource_file(product, version, company, copyright_years)
