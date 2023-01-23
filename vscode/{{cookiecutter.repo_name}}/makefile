@@ -38,8 +38,8 @@ else
 endif
 
 # options
-PIP_SYNC_OPTIONS := --pip-args '--no-deps'
-PIP_COMPILE_OPTIONS := --resolver=backtracking
+PIP_SYNC_OPTIONS := --pip-args '--no-deps --require-hashes'
+PIP_COMPILE_OPTIONS := --resolver=backtracking --generate-hashes
 
 all: sync
 

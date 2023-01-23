@@ -24,10 +24,9 @@ VENV_ACTIVATE := $(VENV)\activate.bat
 VENV_PYTHON := $(VENV)\python.exe
 PIP := $(VENV)\pip.exe
 PIP_SYNC := $(VENV)\pip-sync.exe
-PIP_SYNC_OPTIONS := --pip-args '--no-deps'
+PIP_SYNC_OPTIONS := --pip-args '--no-deps --require-hashes'
 PIP_COMPILE := $(VENV)\pip-compile.exe
-PIP_COMPILE_OPTIONS := --resolver=backtracking
-
+PIP_COMPILE_OPTIONS := --resolver=backtracking --generate-hashes
 
 all: build
 
