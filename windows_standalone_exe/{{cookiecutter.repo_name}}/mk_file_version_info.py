@@ -9,11 +9,11 @@ import time
 
 import click
 
-__version__ = "2022.11.28"
+__version__ = "2022.12.2"
 
 # constants
-COMPANY = "My Company"
-COPYRIGHT_START = "2022"
+COMPANY = "{{cookiecutter.copyright_holder}}"
+COPYRIGHT_START = "{% now 'local', '%Y' %}"
 VERSION_RESOURCE_FILENAME = "file_version_info.txt"
 
 

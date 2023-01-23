@@ -1,4 +1,5 @@
 {
     "repo_name": "windows_exe",
-    "python_path": "C:\\Program Files\\Python310\\python.exe"
+    "python_path": "C:\\Program Files\\Python310\\python.exe",
+    "copyright_holder": "My Company"
 }
