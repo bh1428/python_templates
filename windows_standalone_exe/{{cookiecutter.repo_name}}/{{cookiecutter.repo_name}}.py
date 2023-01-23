@@ -13,7 +13,7 @@ import click
 
 import application
 
-__version__ = "2021.3.18"
+__version__ = "2022.12.2"
 
 # logging configuration
 LogConfigType = dict[str, tp.Union[tp.Any, dict[str, tp.Union[tp.Any, dict[str, tp.Any]]]]]
@@ -40,7 +40,7 @@ LOG_CONFIG: LogConfigType = {
             "backupCount": 4,
         },
     },
-    "root": {"level": "DEBUG", "handlers": ["console", "file"]},
+    "root": {"level": "DEBUG", "handlers": []},
 }
 
 LOG_LEVELS = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]
@@ -48,10 +48,11 @@ LOG_LEVELS = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]
 
 @click.command()
 @click.option("-d", "--divisor", default=1, type=click.INT)
+@click.option("--logfile/--no-logfile", default=False, help="optionally log to a file (default is to console only)")
 @click.option("--logdir", default=".", type=click.Path(exists=True, writable=True), help="directory for the logfiles")
 @click.option("-l", "--loglevel", default="INFO", type=click.Choice(LOG_LEVELS))
 @click.version_option(version=__version__, message="%(prog)s V%(version)s")
-def click_main(divisor: int, logdir: str, loglevel: str) -> int:
+def click_main(divisor: int, logfile: bool, logdir: str, loglevel: str) -> int:
     """Click template example
 
     The docstring entered here will be shown as part of the '--help' output.
@@ -60,7 +61,12 @@ def click_main(divisor: int, logdir: str, loglevel: str) -> int:
     script_name = pl.Path(sys.argv[0]).stem
     log_config = copy.deepcopy(LOG_CONFIG)
     log_config["root"]["level"] = loglevel
-    log_config["handlers"]["file"]["filename"] = pl.Path(logdir).joinpath(f"{script_name}.log")
+    if logfile:
+        log_config["root"]["handlers"] = ["console", "file"]
+        log_config["handlers"]["file"]["filename"] = pl.Path(logdir).joinpath(f"{script_name}.log")
+    else:
+        log_config["root"]["handlers"] = ["console"]
+        del log_config["handlers"]["file"]
     logging.config.dictConfig(log_config)
 
     # initialize logging
@@ -73,6 +79,10 @@ def click_main(divisor: int, logdir: str, loglevel: str) -> int:
             os.environ["USERDOMAIN"],
             os.environ["USERNAME"],
         )
+    if logfile:
+        logger.info("logging to console and file")
+    else:
+        logger.info("logging to console only")
 
     # execute main
     return_code = 0
