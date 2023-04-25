@@ -99,6 +99,7 @@ upgrade_requirements: $(VENV_ACTIVATE)
 .PHONY: sync
 sync: $(VENV_ACTIVATE) dev-requirements.txt
 	$(PIP_SYNC) $(PIP_SYNC_OPTIONS) dev-requirements.txt
+	$(PIP) install -e .
 
 .PHONY: upgrade_venv
 upgrade_venv: upgrade_pip_tools upgrade_requirements sync
