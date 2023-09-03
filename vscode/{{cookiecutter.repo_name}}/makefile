@@ -39,7 +39,7 @@ endif
 
 # options
 PIP_SYNC_OPTIONS := --pip-args '--no-deps'
-PIP_COMPILE_OPTIONS := --resolver=backtracking
+PIP_COMPILE_OPTIONS := --resolver=backtracking --strip-extras
 
 all: sync
 

@@ -35,7 +35,7 @@ PIP := $(VENV)\pip.exe
 PIP_SYNC := $(VENV)\pip-sync.exe
 PIP_SYNC_OPTIONS := --pip-args '--no-deps'
 PIP_COMPILE := $(VENV)\pip-compile.exe
-PIP_COMPILE_OPTIONS := --resolver=backtracking
+PIP_COMPILE_OPTIONS := --resolver=backtracking --strip-extras
 PYSIDE6_UIC := $(VENV)\pyside6-uic.exe
 PYSIDE6_RCC := $(VENV)\pyside6-rcc.exe
 QT_DESIGNER := $(VENV_DIR)\Lib\site-packages\PySide6\designer.exe
