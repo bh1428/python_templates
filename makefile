@@ -16,16 +16,30 @@
 VENV_DIR := venv
 VENV_CLEAN_DIRS := .mypy_cache __pycache__
 
-# binaries / executables
-CMD := "C:\Windows\System32\cmd.exe"
-PYTHON := "C:\Program Files\Python311\python.exe"
-VENV := .\$(VENV_DIR)\Scripts
-VENV_ACTIVATE := $(VENV)\activate.bat
-VENV_PYTHON := $(VENV)\python.exe
-PIP := $(VENV)\pip.exe
-PIP_SYNC := $(VENV)\pip-sync.exe
-PIP_SYNC_OPTIONS := --pip-args '--no-deps'
-PIP_COMPILE := $(VENV)\pip-compile.exe
+# executables for each supported OS
+ifeq ($(OS),Windows_NT)
+	# Windows
+	CMD := "C:\Windows\System32\cmd.exe"
+	PYTHON := "C:\Program Files\Python311\python.exe"
+	VENV := .\$(VENV_DIR)\Scripts
+	VENV_ACTIVATE := $(VENV)\activate.bat
+	VENV_PYTHON := $(VENV)\python.exe
+	PIP := $(VENV)\pip.exe
+	PIP_SYNC := $(VENV)\pip-sync.exe
+	PIP_COMPILE := $(VENV)\pip-compile.exe
+else
+	# Linux
+	PYTHON := "/usr/bin/python3.11"
+	VENV := ./$(VENV_DIR)/bin
+	VENV_ACTIVATE := $(VENV)/activate
+	VENV_PYTHON := $(VENV)/python
+	PIP := $(VENV)/pip
+	PIP_SYNC := $(VENV)/pip-sync
+	PIP_COMPILE := $(VENV)/pip-compile
+endif
+
+# options
+PIP_SYNC_OPTIONS := --pip-args --no-deps
 PIP_COMPILE_OPTIONS := --resolver=backtracking --strip-extras
 
 all: build
@@ -69,7 +83,11 @@ list: $(VENV_ACTIVATE)
 
 .PHONY: clean
 clean:
-	$(CMD) /c "FOR %%F IN ($(VENV_DIR) $(VENV_CLEAN_DIRS)) DO IF EXIST %%F rmdir /q /s %%F"
+    ifeq ($(OS),Windows_NT)
+		$(CMD) /c "FOR %%F IN ($(VENV_DIR) $(VENV_CLEAN_DIRS)) DO IF EXIST %%F rmdir /q /s %%F"
+    else
+		rm -rf $(VENV_DIR) $(VENV_CLEAN_DIRS)
+    endif
 
 .PHONY: build
 build: $(VENV_ACTIVATE) dot_gitignore.jinja2 update_gitignore.py
