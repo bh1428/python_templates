@@ -7,5 +7,4 @@ mypy
 pylint
 pytest
 pytest-cov
-rope
 wheel

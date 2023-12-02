@@ -4,4 +4,3 @@ black
 flake8
 mypy
 pylint
-rope

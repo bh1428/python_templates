@@ -6,4 +6,4 @@ mypy
 pyinstaller
 pylint
 pywin32-ctypes
-rope
+

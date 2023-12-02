@@ -38,7 +38,7 @@ else
 endif
 
 # options
-PIP_SYNC_OPTIONS := --pip-args '--no-deps'
+PIP_SYNC_OPTIONS := --pip-args --no-deps
 PIP_COMPILE_OPTIONS := --resolver=backtracking --strip-extras
 
 all: sync
