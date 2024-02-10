@@ -32,7 +32,6 @@
     ],
     "flake8.importStrategy": "fromEnvironment",
     "flake8.args": [
-        "--max-line-length=120",
-        "--ignore=E203,W503"
+        "--max-line-length=120"
     ]
 }
