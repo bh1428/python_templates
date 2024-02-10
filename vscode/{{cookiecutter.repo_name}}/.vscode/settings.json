@@ -1,16 +1,9 @@
 {
     "editor.formatOnSave": true,
-    "flake8.args": [
-        "--max-line-length=120",
-        "--ignore=E203,W503"
-    ],
-    "mypy-type-checker.importStrategy": "fromEnvironment",
-    "flake8.importStrategy": "fromEnvironment",
     "python.analysis.autoFormatStrings": true,
     "python.analysis.addImport.exactMatchOnly": true,
     "python.analysis.autoImportCompletions": true,
     "python.analysis.completeFunctionParens": true,
-    "pylint.importStrategy": "fromEnvironment",
     "files.exclude": {
         "**/__pycache__": true,
         "**/.coverage": true,
@@ -22,15 +15,24 @@
         "**/*.egg-info": true,
         "**/*.whl": true,
         "**/coverage_html": true,
+        "**/build": true,
         "**/dist": true,
         "**/venv": true
     },
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "mypy-type-checker.importStrategy": "fromEnvironment",
+    "pylint.importStrategy": "fromEnvironment",
     "pylint.args": [
         "--max-line-length=120"
     ],
-    "terminal.integrated.defaultProfile.windows": "Command Prompt",
-    "black-formatter.args": [
+    "ruff.importStrategy": "fromEnvironment",
+    "ruff.lint.run": "onSave",
+    "ruff.format.args": [
         "--line-length=120"
     ],
-    "black-formatter.importStrategy": "fromEnvironment"
+    "flake8.importStrategy": "fromEnvironment",
+    "flake8.args": [
+        "--max-line-length=120",
+        "--ignore=E203,W503"
+    ]
 }
