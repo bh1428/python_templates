@@ -1,10 +1,9 @@
 # add packages (without version) for development purposes in this file
 -r requirements.txt
-black
 coverage
-flake8
 mypy
 pylint
 pytest
 pytest-cov
+ruff
 wheel
