@@ -13,7 +13,7 @@
 #   build                 build templates
 
 # names (directories & files)
-VENV_DIR := venv
+VENV_DIR := .venv
 VENV_CLEAN_DIRS := .mypy_cache __pycache__
 
 # executables for each supported OS
@@ -39,8 +39,8 @@ else
 endif
 
 # options
-PIP_SYNC_OPTIONS := --pip-args --no-deps
-PIP_COMPILE_OPTIONS := --resolver=backtracking --strip-extras
+PIP_SYNC_OPTIONS := --pip-args '--no-deps --require-hashes'
+PIP_COMPILE_OPTIONS := --resolver=backtracking --strip-extras --generate-hashes
 
 all: build
 
