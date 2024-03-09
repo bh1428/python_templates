@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Update all .gitignore's in the templates."""
+
 import pathlib as pl
 
 import jinja2

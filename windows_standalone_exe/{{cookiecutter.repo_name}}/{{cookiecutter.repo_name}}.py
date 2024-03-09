@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Main script for {{cookiecutter.repo_name}}"""
+
 import copy
 import logging
 import logging.config
@@ -16,13 +16,17 @@ import application
 __version__ = "2022.12.2"
 
 # logging configuration
-LogConfigType = dict[str, tp.Union[tp.Any, dict[str, tp.Union[tp.Any, dict[str, tp.Any]]]]]
+LogConfigType = dict[
+    str, tp.Union[tp.Any, dict[str, tp.Union[tp.Any, dict[str, tp.Any]]]]
+]
 LOG_CONFIG: LogConfigType = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
         "simple": {"format": "%(asctime)s %(levelname)s %(message)s"},
-        "precise": {"format": "%(asctime)s %(levelname)s [%(name)s.%(funcName)s] %(message)s"},
+        "precise": {
+            "format": "%(asctime)s %(levelname)s [%(name)s.%(funcName)s] %(message)s"
+        },
     },
     "handlers": {
         "console": {
@@ -48,8 +52,17 @@ LOG_LEVELS = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]
 
 @click.command()
 @click.option("-d", "--divisor", default=1, type=click.INT)
-@click.option("--logfile/--no-logfile", default=False, help="optionally log to a file (default is to console only)")
-@click.option("--logdir", default=".", type=click.Path(exists=True, writable=True), help="directory for the logfiles")
+@click.option(
+    "--logfile/--no-logfile",
+    default=False,
+    help="optionally log to a file (default is to console only)",
+)
+@click.option(
+    "--logdir",
+    default=".",
+    type=click.Path(exists=True, writable=True),
+    help="directory for the logfiles",
+)
 @click.option("-l", "--loglevel", default="INFO", type=click.Choice(LOG_LEVELS))
 @click.version_option(version=__version__, message="%(prog)s V%(version)s")
 def click_main(divisor: int, logfile: bool, logdir: str, loglevel: str) -> int:
@@ -63,7 +76,9 @@ def click_main(divisor: int, logfile: bool, logdir: str, loglevel: str) -> int:
     log_config["root"]["level"] = loglevel
     if logfile:
         log_config["root"]["handlers"] = ["console", "file"]
-        log_config["handlers"]["file"]["filename"] = pl.Path(logdir).joinpath(f"{script_name}.log")
+        log_config["handlers"]["file"]["filename"] = pl.Path(logdir).joinpath(
+            f"{script_name}.log"
+        )
     else:
         log_config["root"]["handlers"] = ["console"]
         del log_config["handlers"]["file"]

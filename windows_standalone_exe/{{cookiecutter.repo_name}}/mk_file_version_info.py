@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """Create version info file."""
+
 import datetime as dt
 import re
 import os.path
@@ -45,7 +45,9 @@ def _mk_version_tuple(version: str) -> tuple[str, str]:
     return version_text, f"({version_tuple})"
 
 
-def create_version_resource_file(product: str, version: str, company: str, copyright_years: str) -> str:
+def create_version_resource_file(
+    product: str, version: str, company: str, copyright_years: str
+) -> str:
     """Create a Windows Version Resource File.
 
     The Version Info File is usable for `pyi-set_version` contained in
@@ -133,7 +135,11 @@ def create_version_resource_file(product: str, version: str, company: str, copyr
 
 @click.command()
 @click.argument("py_script")
-@click.option("--company", default=COMPANY, help=f"company for Version Resource (default: '{COMPANY}'")
+@click.option(
+    "--company",
+    default=COMPANY,
+    help=f"company for Version Resource (default: '{COMPANY}'",
+)
 @click.option(
     "--copyright_start",
     default=COPYRIGHT_START,
@@ -152,7 +158,9 @@ def click_main(py_script: str, company: str, copyright_start: int, out: str) -> 
     PY_SCRIPT: name of the script for which to create a Version Resource file
     """
     # read the version from the python script
-    re_version = re.compile(r"^\s*__version__\s*\=\s*(\'|\")(?P<version>[^.]+\.[^.]+\.[^.]+)(\'|\")")
+    re_version = re.compile(
+        r"^\s*__version__\s*\=\s*(\'|\")(?P<version>[^.]+\.[^.]+\.[^.]+)(\'|\")"
+    )
     version = None
     with open(py_script, encoding="UTF-8") as fh_in:
         for line in fh_in:
@@ -175,7 +183,9 @@ def click_main(py_script: str, company: str, copyright_start: int, out: str) -> 
         copyright_years = f"{copyright_start}-{current_year}"
 
     # create version resource file
-    version_resource_file = create_version_resource_file(product, version, company, copyright_years)
+    version_resource_file = create_version_resource_file(
+        product, version, company, copyright_years
+    )
     with open(out, "w", encoding="UTF-8") as fh_out:
         fh_out.write(version_resource_file)
     click.echo(f"Version Resource File written as '{out}'.")
