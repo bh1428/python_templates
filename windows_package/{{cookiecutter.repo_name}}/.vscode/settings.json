@@ -6,17 +6,17 @@
     "python.analysis.completeFunctionParens": true,
     "python.analysis.typeCheckingMode": "basic",
     "files.exclude": {
-        "**/*.egg-info": true,
-        "**/*.whl": true,
+        "**/__pycache__": true,
         "**/.coverage": true,
         "**/.git": true,
         "**/.pytest_cache": true,
         "**/.venv": true,
         "**/.vscode": true,
+        "**/*.egg-info": true,
+        "**/*.whl": true,
         "**/build": true,
         "**/coverage_html": true,
-        "**/dist": true,
-        "**/__pycache__": true
+        "**/dist": true
     },
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "pylint.importStrategy": "fromEnvironment",

@@ -17,9 +17,9 @@
 # names (directories & files)
 SCRIPT_NAME := {{cookiecutter.repo_name}}
 ICON_NAME := python-icon.svg
-VENV_DIR := venv
+VENV_DIR := .venv
 DIST_DIR := dist
-VENV_CLEAN_DIRS := .mypy_cache __pycache__
+VENV_CLEAN_DIRS := __pycache__
 PRECLEAN_DIRS := $(DIST_DIR)
 PRECLEAN_FILES :=
 POSTCLEAN_DIRS :=

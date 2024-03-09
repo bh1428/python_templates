@@ -4,23 +4,21 @@
     "python.analysis.addImport.exactMatchOnly": true,
     "python.analysis.autoImportCompletions": true,
     "python.analysis.completeFunctionParens": true,
+    "python.analysis.typeCheckingMode": "basic",
     "files.exclude": {
         "**/__pycache__": true,
         "**/.coverage": true,
         "**/.git": true,
-        "**/.hg": true,
-        "**/.mypy_cache": true,
         "**/.pytest_cache": true,
+        "**/.venv": true,
         "**/.vscode": true,
         "**/*.egg-info": true,
         "**/*.whl": true,
-        "**/coverage_html": true,
         "**/build": true,
-        "**/dist": true,
-        "**/venv": true
+        "**/coverage_html": true,
+        "**/dist": true
     },
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
-    "mypy-type-checker.importStrategy": "fromEnvironment",
     "pylint.importStrategy": "fromEnvironment",
     "pylint.args": [
         "--max-line-length=120"

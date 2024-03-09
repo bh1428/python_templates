@@ -31,8 +31,8 @@ SCRIPT_NAME := {{cookiecutter.repo_name}}
 ICON_FILE := images/python.ico
 
 # names (directories & files)
-VENV_DIR := venv
-VENV_CLEAN_DIRS := .mypy_cache __pycache__
+VENV_DIR := .venv
+VENV_CLEAN_DIRS := __pycache__
 PRE_BUILD_CLEAN_DIRS := build dist
 PRE_BUILD_CLEAN_FILES := $(SCRIPT_NAME).spec $(SCRIPT_NAME)_info.txt
 POST_BUILD_CLEAN_DIRS := build

@@ -12,8 +12,8 @@
 #   clean                 remove virtual environment
 
 # names (directories & files)
-VENV_DIR := venv
-VENV_CLEAN_DIRS := .mypy_cache __pycache__
+VENV_DIR := .venv
+VENV_CLEAN_DIRS := __pycache__
 
 # executables for each supported OS
 ifeq ($(OS),Windows_NT)
