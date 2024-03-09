@@ -14,16 +14,6 @@ You can use the PowerShell script `cookiecutter.ps1` to create new projects from
     * `TEMPLATE_DIRS`: templates should be sub-directories of this folder
   - Run `cookiecutter.ps1` and use the menu to select the template
 
-## Visual Studio Code
-In case you want to use Visual Studio Code for Python development, the following set of extensions might be handy (in alphabetical order):
-  * autoDocstring
-  * Code Spell Checker
-  * Material Icon Theme
-  * MyPy
-  * Pylance
-  * Python
-  * Ruff
-
 ## make
 Templates 'abuse' `make` for managing the virtual environment and/or building an executable. In case you need `make` for Windows: use [GnuWin](http://gnuwin32.sourceforge.net/). You can either install the entire set or just [make](http://gnuwin32.sourceforge.net/packages/make.htm). In fact, you only need these files (unpack from the zips and put them somewhere in your path):
   * [Binaries](http://gnuwin32.sourceforge.net/downlinks/make-bin-zip.php) zip:
