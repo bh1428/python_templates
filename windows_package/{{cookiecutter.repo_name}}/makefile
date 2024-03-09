@@ -13,8 +13,8 @@
 
 # names (directories & files)
 PACKAGE := {{ cookiecutter.package_name }}
-VENV_DIR := venv
-VENV_CLEAN_DIRS := .mypy_cache __pycache__
+VENV_DIR := .venv
+VENV_CLEAN_DIRS := __pycache__
 PRECLEAN_DIRS := build dist {{ cookiecutter.package_name }}.egg-info
 PRECLEAN_FILES :=
 POSTCLEAN_DIRS := build {{cookiecutter.package_name}}.egg-info
@@ -31,9 +31,9 @@ VENV_ACTIVATE := $(VENV)\activate.bat
 VENV_PYTHON := $(VENV)\python.exe
 PIP := $(VENV)\pip.exe
 PIP_SYNC := $(VENV)\pip-sync.exe
-PIP_SYNC_OPTIONS := --pip-args '--no-deps'
+PIP_SYNC_OPTIONS := --pip-args '--no-deps --require-hashes'
 PIP_COMPILE := $(VENV)\pip-compile.exe
-PIP_COMPILE_OPTIONS := --resolver=backtracking --strip-extras
+PIP_COMPILE_OPTIONS := --resolver=backtracking --strip-extras --generate-hashes
 PYTEST := $(VENV)\pytest.exe
 
 
@@ -49,10 +49,10 @@ $(VENV_ACTIVATE):
 	$(VENV_PYTHON) -m pip install wheel
 	$(VENV_PYTHON) -m pip install pip-tools
     ifeq (,$(wildcard requirements.txt))
-		$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) requirements.in
+		$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) -o requirements.txt pyproject.toml
     endif
     ifeq (,$(wildcard dev-requirements.txt))
-		$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) dev-requirements.in
+		$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) --extra dev -o dev-requirements.txt pyproject.toml
     endif
 	$(PIP_SYNC) $(PIP_SYNC_OPTIONS) dev-requirements.txt
 	$(PIP) install -e .
@@ -61,7 +61,7 @@ $(VENV_ACTIVATE):
 build: $(VENV_ACTIVATE)
 	$(CMD) /c "FOR %%F IN ($(PRECLEAN_DIRS)) DO IF EXIST %%F rmdir /q /s %%F"
 	$(CMD) /c "FOR %%F IN ($(PRECLEAN_FILES)) DO IF EXIST %%F del %%F"
-	$(VENV_PYTHON) setup.py bdist_wheel
+	$(VENV_PYTHON) -m build --wheel
 	$(CMD) /c "FOR %%F IN ($(POSTCLEAN_DIRS)) DO IF EXIST %%F rmdir /q /s %%F"
 	$(CMD) /c "FOR %%F IN ($(POSTCLEAN_FILES)) DO IF EXIST %%F del %%F"
 	$(VENV_PYTHON) -c "import sys; import datetime; print(f'Python {sys.version}'); print(f'Build time: {datetime.datetime.now().astimezone()}\n')" > build_info.txt
@@ -80,11 +80,11 @@ coverage: $(VENV_ACTIVATE)
 	$(VENV_PYTHON) -m coverage html -d $(COVERAGE_HTML)
 	$(CMD) /c start $(COVERAGE_HTML)\index.html
 
-requirements.txt: $(VENV_ACTIVATE) requirements.in
-	$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) requirements.in
+requirements.txt: $(VENV_ACTIVATE) pyproject.toml
+	$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) -o requirements.txt pyproject.toml
 
-dev-requirements.txt: $(VENV_ACTIVATE) dev-requirements.in requirements.txt
-	$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) dev-requirements.in
+dev-requirements.txt: $(VENV_ACTIVATE) pyproject.toml
+	$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) --extra dev -o dev-requirements.txt pyproject.toml
 
 .PHONY: upgrade_pip_tools
 upgrade_pip_tools: $(VENV_ACTIVATE)
@@ -93,8 +93,8 @@ upgrade_pip_tools: $(VENV_ACTIVATE)
 
 .PHONY: upgrade_requirements
 upgrade_requirements: $(VENV_ACTIVATE)
-	$(PIP_COMPILE) --upgrade $(PIP_COMPILE_OPTIONS) requirements.in
-	$(PIP_COMPILE) --upgrade $(PIP_COMPILE_OPTIONS) dev-requirements.in
+	$(PIP_COMPILE) --upgrade $(PIP_COMPILE_OPTIONS) -o requirements.txt pyproject.toml
+	$(PIP_COMPILE) --upgrade $(PIP_COMPILE_OPTIONS) --extra dev -o dev-requirements.txt pyproject.toml
 
 .PHONY: sync
 sync: $(VENV_ACTIVATE) dev-requirements.txt
@@ -103,7 +103,7 @@ sync: $(VENV_ACTIVATE) dev-requirements.txt
 
 .PHONY: upgrade_venv
 upgrade_venv: upgrade_pip_tools upgrade_requirements sync
-    
+
 .PHONY: list
 list: $(VENV_ACTIVATE)
 	$(PIP) list
