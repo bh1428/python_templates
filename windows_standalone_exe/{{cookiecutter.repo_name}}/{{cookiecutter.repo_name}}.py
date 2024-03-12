@@ -13,19 +13,19 @@ import click
 
 import application
 
-__version__ = "2022.12.2"
+__version__ = "2024.3.12"
 
 # logging configuration
 LogConfigType = dict[
     str, tp.Union[tp.Any, dict[str, tp.Union[tp.Any, dict[str, tp.Any]]]]
 ]
 LOG_CONFIG: LogConfigType = {
-    "version": 1,
+    'version': 1,
     "disable_existing_loggers": False,
     "formatters": {
         "simple": {"format": "%(asctime)s %(levelname)s %(message)s"},
         "precise": {
-            "format": "%(asctime)s %(levelname)s [%(name)s.%(funcName)s] %(message)s"
+            "format": "[%(asctime)s] [%(levelname)s] [%(name)s.%(funcName)s(%(lineno)d)] %(message)s"
         },
     },
     "handlers": {
