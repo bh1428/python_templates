@@ -19,11 +19,11 @@
         "**/dist": true
     },
     "terminal.integrated.defaultProfile.windows": "Command Prompt",
-    "pylint.importStrategy": "fromEnvironment",
+    "pylint.importStrategy": "useBundled",
     "pylint.args": [
         "--max-line-length=120"
     ],
-    "ruff.importStrategy": "fromEnvironment",
+    "ruff.importStrategy": "useBundled",
     "ruff.lint.run": "onSave",
     "ruff.format.args": [
         "--line-length=120"
