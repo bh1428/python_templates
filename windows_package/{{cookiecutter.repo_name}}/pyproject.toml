@@ -22,10 +22,8 @@ dynamic = ["version"]
 [project.optional-dependencies]
 dev = [
     "coverage",
-    "pylint",
     "pytest",
     "pytest-cov",
-    "ruff",
     "wheel",
 ]
 
