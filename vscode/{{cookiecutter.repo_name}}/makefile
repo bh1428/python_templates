@@ -19,7 +19,7 @@ VENV_CLEAN_DIRS := __pycache__
 ifeq ($(OS),Windows_NT)
 	# Windows
 	CMD := "C:\Windows\System32\cmd.exe"
-	PYTHON := "C:\Program Files\Python312\python.exe"
+	PYTHON := "C:\Program Files\Python313\python.exe"
 	VENV := .\$(VENV_DIR)\Scripts
 	VENV_ACTIVATE := $(VENV)\activate.bat
 	VENV_PYTHON := $(VENV)\python.exe
@@ -28,7 +28,7 @@ ifeq ($(OS),Windows_NT)
 	PIP_COMPILE := $(VENV)\pip-compile.exe
 else
 	# Linux
-	PYTHON := "/usr/bin/python3.12"
+	PYTHON := "/usr/bin/python3.13"
 	VENV := ./$(VENV_DIR)/bin
 	VENV_ACTIVATE := $(VENV)/activate
 	VENV_PYTHON := $(VENV)/python

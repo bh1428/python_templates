@@ -6,5 +6,5 @@
     "copyright_author": "Ben Hattem",
     "author_email": "benghattem@gmail.com",
     "copyright_year": "{% now 'utc', '%Y' %}",
-    "python_path": "C:\\Program Files\\Python312\\python.exe"
+    "python_path": "C:\\Program Files\\Python313\\python.exe"
 }

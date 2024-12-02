@@ -7,11 +7,11 @@ name = "{{ cookiecutter.package_name }}"
 authors = [{ name = "{{ cookiecutter.copyright_author }}", email = "{{ cookiecutter.author_email }}" }]
 description = "{{ cookiecutter.package_description }}"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 classifiers = [
     "Development Status :: 1 - Planning",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "License :: OSI Approved :: MIT License",
     "Operating System :: Microsoft :: Windows",
 ]
