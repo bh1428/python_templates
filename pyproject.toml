@@ -4,7 +4,6 @@ build-backend = "hatchling.build"
 
 [project]
 name = "python_templates"
-version = "2014.12.12"
 authors = [
   { name="Ben Hattem", email="benghattem@gmail.com" },
 ]
@@ -21,3 +20,7 @@ dependencies = [
     "jinja2",
     "requests",
 ]
+dynamic = ["version"]
+
+[tool.hatch.version]
+path = "version.txt"

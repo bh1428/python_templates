@@ -23,7 +23,7 @@
 *.md                text diff=markdown
 *.py                text diff=python
 *.toml              text
-*requirements.in    text
+*.txt               text
 *requirements.txt   text
 LICENSE             text
 makefile            text

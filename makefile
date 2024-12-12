@@ -15,6 +15,7 @@
 # names (directories & files)
 VENV_DIR := .venv
 VENV_CLEAN_DIRS := __pycache__
+VERSION_FILE := version.txt
 
 # executables for each supported OS
 ifeq ($(OS),Windows_NT)
@@ -92,3 +93,4 @@ clean:
 .PHONY: build
 build: $(VENV_ACTIVATE) dot_gitignore.jinja2 update_gitignore.py
 	$(VENV_PYTHON) update_gitignore.py
+	$(VENV_PYTHON) -c "import datetime; d=datetime.date.today(); print(f'VERSION=""{d.year:d}.{d.month:d}.{d.day:d}""')" > "$(VERSION_FILE)"
