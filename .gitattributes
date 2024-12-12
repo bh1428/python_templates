@@ -22,6 +22,7 @@
 *.json              text
 *.md                text diff=markdown
 *.py                text diff=python
+*.toml              text
 *requirements.in    text
 *requirements.txt   text
 LICENSE             text

@@ -54,12 +54,12 @@ $(VENV_ACTIVATE):
 	$(VENV_PYTHON) -m pip install wheel
 	$(VENV_PYTHON) -m pip install pip-tools
     ifeq (,$(wildcard requirements.txt))
-		$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) requirements.in
+		$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) -o requirements.txt pyproject.toml
     endif
 	$(PIP_SYNC) $(PIP_SYNC_OPTIONS) requirements.txt
 
-requirements.txt: $(VENV_ACTIVATE) requirements.in
-	$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) requirements.in
+requirements.txt: $(VENV_ACTIVATE) pyproject.toml
+	$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) -o requirements.txt pyproject.toml
 
 .PHONY: upgrade_pip_tools
 upgrade_pip_tools: $(VENV_ACTIVATE)
@@ -68,7 +68,7 @@ upgrade_pip_tools: $(VENV_ACTIVATE)
 
 .PHONY: upgrade_requirements
 upgrade_requirements: $(VENV_ACTIVATE)
-	$(PIP_COMPILE) --upgrade $(PIP_COMPILE_OPTIONS) requirements.in
+	$(PIP_COMPILE) --upgrade $(PIP_COMPILE_OPTIONS) -o requirements.txt pyproject.toml
 
 .PHONY: sync
 sync: $(VENV_ACTIVATE) requirements.txt

@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "python_templates"
+version = "2014.12.12"
+authors = [
+  { name="Ben Hattem", email="benghattem@gmail.com" },
+]
+description = "Python templates"
+readme = "README.md"
+requires-python = ">=3.13"
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "jinja2",
+    "requests",
+]
