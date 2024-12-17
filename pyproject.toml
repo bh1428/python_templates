@@ -24,3 +24,10 @@ dynamic = ["version"]
 
 [tool.hatch.version]
 path = "version.txt"
+
+[tool.pip-tools.compile]
+resolver = "backtracking"
+strip-extras = true
+
+[tool.pip-tools.sync]
+pip-args = "--no-deps"

@@ -39,9 +39,6 @@ else
 	PIP_COMPILE := $(VENV)/pip-compile
 endif
 
-# options
-PIP_SYNC_OPTIONS := --pip-args '--no-deps'
-PIP_COMPILE_OPTIONS := --resolver=backtracking --strip-extras
 
 all: build
 
@@ -55,12 +52,12 @@ $(VENV_ACTIVATE):
 	$(VENV_PYTHON) -m pip install wheel
 	$(VENV_PYTHON) -m pip install pip-tools
     ifeq (,$(wildcard requirements.txt))
-		$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) -o requirements.txt pyproject.toml
+		$(PIP_COMPILE) -o requirements.txt pyproject.toml
     endif
-	$(PIP_SYNC) $(PIP_SYNC_OPTIONS) requirements.txt
+	$(PIP_SYNC) requirements.txt
 
 requirements.txt: $(VENV_ACTIVATE) pyproject.toml
-	$(PIP_COMPILE) $(PIP_COMPILE_OPTIONS) -o requirements.txt pyproject.toml
+	$(PIP_COMPILE) -o requirements.txt pyproject.toml
 
 .PHONY: upgrade_pip_tools
 upgrade_pip_tools: $(VENV_ACTIVATE)
@@ -69,11 +66,11 @@ upgrade_pip_tools: $(VENV_ACTIVATE)
 
 .PHONY: upgrade_requirements
 upgrade_requirements: $(VENV_ACTIVATE)
-	$(PIP_COMPILE) --upgrade $(PIP_COMPILE_OPTIONS) -o requirements.txt pyproject.toml
+	$(PIP_COMPILE) --upgrade -o requirements.txt pyproject.toml
 
 .PHONY: sync
 sync: $(VENV_ACTIVATE) requirements.txt
-	$(PIP_SYNC) $(PIP_SYNC_OPTIONS) requirements.txt
+	$(PIP_SYNC) requirements.txt
 
 .PHONY: upgrade_venv
 upgrade_venv: upgrade_pip_tools upgrade_requirements sync
