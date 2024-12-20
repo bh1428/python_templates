@@ -15,7 +15,7 @@
 # names (directories & files)
 VENV_DIR := .venv
 VENV_CLEAN_DIRS := __pycache__
-VERSION_FILE := version.txt
+VERSION_FILE := VERSION
 
 # executables for each supported OS
 ifeq ($(OS),Windows_NT)

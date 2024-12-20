@@ -27,6 +27,7 @@
 *requirements.txt   text
 LICENSE             text
 makefile            text
+VERSION             text
 
 #
 # Never perform LF normalization
