@@ -1,5 +1,5 @@
 [project]
-name = "python_templates"
+name = "python-templates"
 authors = [
   { name="Ben Hattem", email="benghattem@gmail.com" },
 ]
@@ -25,9 +25,5 @@ build-backend = "hatchling.build"
 [tool.hatch.version]
 path = "VERSION"
 
-[tool.pip-tools.compile]
-resolver = "backtracking"
-strip-extras = true
-
-[tool.pip-tools.sync]
-pip-args = "--no-deps"
+[tool.uv]
+link-mode = "copy"

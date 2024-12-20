@@ -4,9 +4,9 @@
 
 # Make targets (can be used when calling make):
 #   init                  alias for initial setup of virtual env
-#   upgrade_pip_tools     upgrade pip and the pip-tools package
+#   upgrade_uv            upgrade pip and the uv package
 #   upgrade_requirements  upgrade *requirements.txt files without installing
-#   upgrade_venv          upgrade pip-tools, *requirements.txt and install packages
+#   upgrade_venv          upgrade uv, requirements.txt and install packages
 #   sync                  synchronize venv with *requirements.txt
 #   list                  show list of installed packages in the venv
 #   clean                 remove virtual environment
@@ -26,8 +26,7 @@ ifeq ($(OS),Windows_NT)
 	VENV_ACTIVATE := $(VENV)\activate.bat
 	VENV_PYTHON := $(VENV)\python.exe
 	PIP := $(VENV)\pip.exe
-	PIP_SYNC := $(VENV)\pip-sync.exe
-	PIP_COMPILE := $(VENV)\pip-compile.exe
+	UV := $(VENV)\uv.exe
 else
 	# Linux
 	PYTHON := "/usr/bin/python3.13"
@@ -35,8 +34,7 @@ else
 	VENV_ACTIVATE := $(VENV)/activate
 	VENV_PYTHON := $(VENV)/python
 	PIP := $(VENV)/pip
-	PIP_SYNC := $(VENV)/pip-sync
-	PIP_COMPILE := $(VENV)/pip-compile
+	UV := $(VENV)/uv
 endif
 
 
@@ -50,31 +48,31 @@ $(VENV_ACTIVATE):
 	$(PYTHON) -m venv $(VENV_DIR)
 	$(VENV_PYTHON) -m pip install pip --upgrade
 	$(VENV_PYTHON) -m pip install wheel
-	$(VENV_PYTHON) -m pip install pip-tools
+	$(VENV_PYTHON) -m pip install uv
     ifeq (,$(wildcard requirements.txt))
-		$(PIP_COMPILE) -o requirements.txt pyproject.toml
+		$(UV) pip compile -o requirements.txt pyproject.toml
     endif
-	$(PIP_SYNC) requirements.txt
+	$(UV) pip sync requirements.txt
 
 requirements.txt: $(VENV_ACTIVATE) pyproject.toml
-	$(PIP_COMPILE) -o requirements.txt pyproject.toml
+	$(UV) pip compile -o requirements.txt pyproject.toml
 
-.PHONY: upgrade_pip_tools
-upgrade_pip_tools: $(VENV_ACTIVATE)
+.PHONY: upgrade_uv
+upgrade_uv: $(VENV_ACTIVATE)
 	$(VENV_PYTHON) -m pip install pip --upgrade
-	$(VENV_PYTHON) -m pip install pip-tools --upgrade
+	$(VENV_PYTHON) -m pip install uv --upgrade
 
 .PHONY: upgrade_requirements
 upgrade_requirements: $(VENV_ACTIVATE)
-	$(PIP_COMPILE) --upgrade -o requirements.txt pyproject.toml
+	$(UV) pip compile --upgrade -o requirements.txt pyproject.toml
 
 .PHONY: sync
 sync: $(VENV_ACTIVATE) requirements.txt
-	$(PIP_SYNC) requirements.txt
+	$(UV) pip sync requirements.txt
 
 .PHONY: upgrade_venv
-upgrade_venv: upgrade_pip_tools upgrade_requirements sync
-    
+upgrade_venv: upgrade_uv upgrade_requirements sync
+
 .PHONY: list
 list: $(VENV_ACTIVATE)
 	$(PIP) list
