@@ -1,3 +1,8 @@
 {
-    "repo_name": "vscode"
+    "repo_name": "vscode",
+    "repo_description": "A project using VSCode.",
+    "repo_version": "{% arrow_now 'local', 'YYYY.M.D' %}",
+    "repo_author": "Ben Hattem",
+    "repo_author_email": "benghattem@gmail.com",
+    "_extensions": ["extensions.ArrowNowExtension"]
 }

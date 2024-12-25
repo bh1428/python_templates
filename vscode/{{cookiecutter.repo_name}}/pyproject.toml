@@ -1,0 +1,33 @@
+[project]
+name = "{{ cookiecutter.repo_name }}"
+description = "{{ cookiecutter.repo_description }}"
+version = "{{ cookiecutter.repo_version }}"
+authors = [
+  { name="{{ cookiecutter.repo_author }}", email="{{ cookiecutter.repo_author_email }}" },
+]
+requires-python = ">=3.13"
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.13",
+]
+dependencies = [
+]
+
+[project.optional-dependencies]
+dev = [
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+link-mode = "copy"
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+
+[tool.pylint.messages_control]
+max-line-length = 120

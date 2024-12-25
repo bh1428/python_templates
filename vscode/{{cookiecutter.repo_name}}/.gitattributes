@@ -20,7 +20,7 @@
 #
 *.json              text
 *.py                text diff=python
-*requirements.in    text
+*.toml              text
 *requirements.txt   text
 makefile            text
 
