@@ -75,7 +75,7 @@ upgrade_venv: upgrade_uv upgrade_requirements sync
 
 .PHONY: list
 list: $(VENV_ACTIVATE)
-	$(PIP) list
+	$(UV) pip list
 
 .PHONY: clean
 clean:
