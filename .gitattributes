@@ -30,6 +30,11 @@ makefile            text
 VERSION             text
 
 #
+# Linux files which always have LF line endings at checkout
+#
+*requirements.txt   text eol=lf
+
+#
 # Never perform LF normalization
 #
 *.ps1               text eol=crlf

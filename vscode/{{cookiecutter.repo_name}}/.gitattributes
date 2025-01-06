@@ -21,8 +21,12 @@
 *.json              text
 *.py                text diff=python
 *.toml              text
-*requirements.txt   text
 makefile            text
+
+#
+# Linux files which always have LF line endings at checkout
+#
+*requirements.txt   text eol=lf
 
 #
 # Never perform LF normalization
