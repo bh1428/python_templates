@@ -1,5 +1,8 @@
 {
     "repo_name": "windows_qt",
-    "version": "0.1.0",
-    "python_path": "C:\\Program Files\\Python313\\python.exe"
+    "app_description": "A PySide6 based project.",
+    "app_version": "{% arrow_now 'local', 'YYYY.M.D' %}",
+    "app_author": "Ben Hattem",
+    "app_author_email": "benghattem@gmail.com",
+    "_extensions": ["extensions.ArrowNowExtension"]
 }

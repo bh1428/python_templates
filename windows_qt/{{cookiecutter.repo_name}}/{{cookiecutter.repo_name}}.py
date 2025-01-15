@@ -3,9 +3,9 @@ import sys
 
 from PySide6 import QtCore, QtWidgets
 
-from {{cookiecutter.repo_name}}_ui import Ui_MainWindow
+from {{ cookiecutter.repo_name }}_ui import Ui_MainWindow
 
-__version__ = "{{cookiecutter.version}}"
+__version__ = "{{ cookiecutter.app_version }}"
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -20,7 +20,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.Slot()
     def on_action_about_triggered(self):
-        about_text = "<br>".join([f"<b>{{cookiecutter.repo_name}}</b> V{__version__}", "", "This is a PySide6 application."])
+        about_text = "<br>".join([f"<b>{{ cookiecutter.repo_name }}</b> V{__version__}", "", "This is a PySide6 application."])
         QtWidgets.QMessageBox.about(self, "About", about_text)
 
     @QtCore.Slot()

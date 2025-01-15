@@ -11,10 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>{{cookiecutter.repo_name}}</string>
+   <string>{{ cookiecutter.repo_name }}</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="{{cookiecutter.repo_name}}.qrc">
+   <iconset resource="{{ cookiecutter.repo_name }}.qrc">
     <normaloff>:/images/python-icon.svg</normaloff>:/images/python-icon.svg</iconset>
   </property>
   <widget class="QWidget" name="central_widget">
@@ -76,7 +76,7 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="{{cookiecutter.repo_name}}.qrc"/>
+  <include location="{{ cookiecutter.repo_name }}.qrc"/>
  </resources>
  <connections/>
 </ui>

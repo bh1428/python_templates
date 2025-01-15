@@ -22,10 +22,14 @@
 *.py                text diff=python
 *.qrc               text
 *.svg               text
+*.toml              text
 *.ui                text
-*requirements.in    text
-*requirements.txt   text
 makefile            text
+
+#
+# Linux files which always have LF line endings at checkout
+#
+*requirements.txt   text eol=lf
 
 #
 # Never perform LF normalization
