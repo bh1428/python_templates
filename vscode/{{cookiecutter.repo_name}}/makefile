@@ -9,11 +9,9 @@
 #   upgrade_venv          upgrade uv, requirements.txt and install packages
 #   sync                  synchronize venv with *requirements.txt (default target)
 #   list                  show list of installed packages in the venv
-#   clean                 remove virtual environment
 
 # names (directories & files)
 VENV_DIR := .venv
-VENV_CLEAN_DIRS := __pycache__
 
 # executables for each supported OS
 ifeq ($(OS),Windows_NT)
@@ -79,11 +77,3 @@ upgrade_venv: upgrade_uv upgrade_requirements sync
 .PHONY: list
 list: $(VENV_ACTIVATE)
 	$(UV) pip list
-
-.PHONY: clean
-clean:
-    ifeq ($(OS),Windows_NT)
-		$(CMD) /c "FOR %%F IN ($(VENV_DIR) $(VENV_CLEAN_DIRS)) DO IF EXIST %%F rmdir /q /s %%F"
-    else
-		rm -rf $(VENV_DIR) $(VENV_CLEAN_DIRS)
-    endif
