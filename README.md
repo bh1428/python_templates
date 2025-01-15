@@ -1,11 +1,11 @@
 # Python Templates for Windows projects
 
 ## Templates
-This repository contains [Cookiecutter](https://cookiecutter.readthedocs.io/) templates for Python development projects (on Windows). All templates use a combination of make with [pip-tools](https://pypi.org/project/pip-tools/) to manage a virtual environment:
-  * __windows_package__: minimal Python package setup
-  * __windows_qt__: basic Qt / PySide6 application (using VSCode and QT Designer)
-  * __windows_standalone_exe__: standalone (Windows) executable (with an example how the combination of `click`, `logging` (both to file and console) and `pyinstaller` can be used)
-  * __windows_vsc__: basic VSCode template.
+This repository contains [Cookiecutter](https://cookiecutter.readthedocs.io/) templates for Python development projects (on Windows and limited Linux support). All templates use a combination of make with [uv](https://docs.astral.sh/uv/) to manage a virtual environment:
+  * __windows_package__: minimal Python package setup.
+  * __windows_qt__: basic Qt / PySide6 application (using VSCode and QT Designer).
+  * __windows_standalone_exe__: standalone (Windows) executable (with an example how the combination of `click`, `logging` (both to file and console) and `pyinstaller` can be used).
+  * __vscode__: basic VSCode template.
 
 You can use the PowerShell script `cookiecutter.ps1` to create new projects from the templates:
   - Copy `cookiecutter.ps1` to your main project directory (projects will be created as sub-directories).
