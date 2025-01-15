@@ -1,4 +1,0 @@
-# add packages (without version) for development purposes in this file
--r requirements.txt
-pyinstaller
-pywin32-ctypes

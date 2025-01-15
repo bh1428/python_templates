@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Main script for {{cookiecutter.repo_name}}"""
+"""Main script for {{ cookiecutter.repo_name }}"""
 
 import copy
 import logging
@@ -13,20 +13,16 @@ import click
 
 import application
 
-__version__ = "2024.3.12"
+__version__ = "{{ cookiecutter.app_version }}"
 
 # logging configuration
-LogConfigType = dict[
-    str, tp.Union[tp.Any, dict[str, tp.Union[tp.Any, dict[str, tp.Any]]]]
-]
+LogConfigType = dict[str, tp.Union[tp.Any, dict[str, tp.Union[tp.Any, dict[str, tp.Any]]]]]
 LOG_CONFIG: LogConfigType = {
-    'version': 1,
+    "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
         "simple": {"format": "%(asctime)s %(levelname)s %(message)s"},
-        "precise": {
-            "format": "[%(asctime)s] [%(levelname)s] [%(name)s.%(funcName)s(%(lineno)d)] %(message)s"
-        },
+        "precise": {"format": "[%(asctime)s] [%(levelname)s] [%(name)s.%(funcName)s(%(lineno)d)] %(message)s"},
     },
     "handlers": {
         "console": {
@@ -76,9 +72,7 @@ def click_main(divisor: int, logfile: bool, logdir: str, loglevel: str) -> int:
     log_config["root"]["level"] = loglevel
     if logfile:
         log_config["root"]["handlers"] = ["console", "file"]
-        log_config["handlers"]["file"]["filename"] = pl.Path(logdir).joinpath(
-            f"{script_name}.log"
-        )
+        log_config["handlers"]["file"]["filename"] = pl.Path(logdir).joinpath(f"{script_name}.log")
     else:
         log_config["root"]["handlers"] = ["console"]
         del log_config["handlers"]["file"]

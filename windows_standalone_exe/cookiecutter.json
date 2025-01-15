@@ -1,5 +1,11 @@
 {
     "repo_name": "windows_exe",
-    "python_path": "C:\\Program Files\\Python313\\python.exe",
-    "copyright_holder": "My Company"
+    "app_description": "A standalone Windows executable.",
+    "app_version": "{% arrow_now 'local', 'YYYY.M.D' %}",
+    "app_author": "Ben Hattem",
+    "app_author_email": "benghattem@gmail.com",
+    "app_copyright_holder": "Ben Hattem",
+    "_extensions": [
+        "extensions.ArrowNowExtension"
+    ]
 }
