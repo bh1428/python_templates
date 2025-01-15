@@ -198,3 +198,4 @@ cython_debug/
 #
 # Additional files
 #
+{{ cookiecutter.repo_name }}_info.txt
