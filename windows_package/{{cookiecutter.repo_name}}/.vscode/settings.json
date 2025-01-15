@@ -18,14 +18,12 @@
         "**/coverage_html": true,
         "**/dist": true
     },
-    "terminal.integrated.defaultProfile.windows": "Command Prompt",
     "pylint.importStrategy": "useBundled",
-    "pylint.args": [
-        "--max-line-length=120"
-    ],
     "ruff.importStrategy": "useBundled",
     "ruff.lint.run": "onSave",
-    "ruff.format.args": [
-        "--line-length=120"
-    ]
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }

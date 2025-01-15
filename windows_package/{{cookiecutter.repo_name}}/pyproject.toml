@@ -21,6 +21,7 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 dev = [
+    "build",
     "coverage",
     "pytest",
     "pytest-cov",
@@ -35,6 +36,9 @@ packages = ["{{ cookiecutter.package_name }}"]
 
 [tool.hatch.version]
 path = "{{ cookiecutter.package_name }}/__init__.py"
+
+[tool.uv]
+link-mode = "copy"
 
 [tool.ruff]
 line-length = 120
