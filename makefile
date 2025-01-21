@@ -13,24 +13,20 @@
 
 # names (directories & files)
 VENV_DIR := .venv
+UV := uv
 VERSION_FILE := VERSION
 
 # executables for each supported OS
 ifeq ($(OS),Windows_NT)
 	# Windows
-	CMD := "C:\Windows\System32\cmd.exe"
-	PYTHON := "C:\Program Files\Python313\python.exe"
 	VENV := .\$(VENV_DIR)\Scripts
 	VENV_ACTIVATE := $(VENV)\activate.bat
 	VENV_PYTHON := $(VENV)\python.exe
-	UV := $(VENV)\uv.exe
 else
 	# Linux
-	PYTHON := "/usr/bin/python3.13"
 	VENV := ./$(VENV_DIR)/bin
 	VENV_ACTIVATE := $(VENV)/activate
 	VENV_PYTHON := $(VENV)/python
-	UV := $(VENV)/uv
 endif
 
 
@@ -41,10 +37,7 @@ all: build
 init: $(VENV_ACTIVATE)
 
 $(VENV_ACTIVATE):
-	$(PYTHON) -m venv $(VENV_DIR)
-	$(VENV_PYTHON) -m pip install pip --upgrade
-	$(VENV_PYTHON) -m pip install wheel
-	$(VENV_PYTHON) -m pip install uv
+	$(UV) venv
     ifeq (,$(wildcard requirements.txt))
 		$(UV) pip compile -o requirements.txt pyproject.toml
     endif
@@ -55,8 +48,7 @@ requirements.txt: $(VENV_ACTIVATE) pyproject.toml
 
 .PHONY: upgrade_uv
 upgrade_uv: $(VENV_ACTIVATE)
-	$(VENV_PYTHON) -m pip install pip --upgrade
-	$(VENV_PYTHON) -m pip install uv --upgrade
+	$(UV) self update
 
 .PHONY: upgrade_requirements
 upgrade_requirements: $(VENV_ACTIVATE)
