@@ -3,7 +3,10 @@
         "**/.venv": true
     },
     "cSpell.words": [
+        "cookiecutter",
+        "pylint",
         "pyproject",
+        "setuptools",
         "VENV"
     ]
 }
