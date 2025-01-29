@@ -21,8 +21,14 @@ LOG_CONFIG: LogConfigType = {
     "version": 1,
     "disable_existing_loggers": False,
     "formatters": {
-        "simple": {"format": "%(asctime)s %(levelname)s %(message)s"},
-        "precise": {"format": "[%(asctime)s] [%(levelname)s] [%(name)s.%(funcName)s(%(lineno)d)] %(message)s"},
+        "simple": {
+            "format": "%(asctime)s.%(msecs)03d %(levelname)s %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+        },
+        "precise": {
+            "format": "%(asctime)s.%(msecs)03d %(levelname)s [%(name)s.%(funcName)s(%(lineno)d)] %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M:%S",
+        },
     },
     "handlers": {
         "console": {
