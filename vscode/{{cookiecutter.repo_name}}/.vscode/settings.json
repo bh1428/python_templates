@@ -3,7 +3,7 @@
     "python.analysis.autoFormatStrings": true,
     "python.analysis.addImport.exactMatchOnly": true,
     "python.analysis.autoImportCompletions": true,
-    "python.analysis.completeFunctionParens": true,
+    "python.analysis.completeFunctionParens": false,
     "python.analysis.typeCheckingMode": "basic",
     "files.exclude": {
         "**/__pycache__": true,
