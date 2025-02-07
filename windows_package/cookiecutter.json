@@ -1,8 +1,9 @@
 {
     "repo_name": "package",
     "package_name": "{{ cookiecutter.repo_name }}",
+    "package_description": "Package description.",
+    "python_version": "3.13.2",
     "package_version": "{% arrow_now 'local', 'YYYY.M.D' %}",
-    "package_description": "Package description",
     "copyright_author": "Ben Hattem",
     "author_email": "benghattem@gmail.com",
     "copyright_year": "{% now 'utc', '%Y' %}",
