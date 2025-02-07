@@ -20,5 +20,12 @@
     },
     "pylint.importStrategy": "useBundled",
     "ruff.importStrategy": "useBundled",
-    "ruff.lint.run": "onSave"
+    "ruff.nativeServer": "on",
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.fixAll": "explicit",
+            "source.organizeImports": "explicit"
+        },
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    }
 }
