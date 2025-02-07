@@ -4,12 +4,11 @@ authors = [
   { name="{{ cookiecutter.app_author }}", email="{{ cookiecutter.app_author_email }}" },
 ]
 description = "{{ cookiecutter.app_description }}"
-requires-python = "==3.13.2"
+requires-python = "=={{ cookiecutter.python_version }}"
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
+    "Development Status :: 1 - Planning",
     "Private :: Do Not Upload",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.13",
     "License :: Other/Proprietary License",
     "Operating System :: Microsoft :: Windows",
 ]
@@ -32,11 +31,13 @@ build-backend = "hatchling.build"
 link-mode = "copy"
 
 [tool.uv.pip]
+annotation-style = "line"
 generate-hashes = true
-require-hashes = true
 
 [tool.pylint.messages_control]
 max-line-length = 120
+disable = [
+]
 
 [tool.ruff]
 line-length = 120
