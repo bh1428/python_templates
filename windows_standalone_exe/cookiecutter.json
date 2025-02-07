@@ -6,7 +6,5 @@
     "app_author": "Ben Hattem",
     "app_author_email": "benghattem@gmail.com",
     "app_copyright_holder": "Ben Hattem",
-    "_extensions": [
-        "extensions.ArrowNowExtension"
-    ]
+    "_extensions": ["extensions.ArrowNowExtension"]
 }

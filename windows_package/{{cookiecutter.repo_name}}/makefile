@@ -3,15 +3,15 @@
 #
 
 # Make targets:
-#   init                 	initial setup virtual env
-#   upgrade_uv         		upgrade uv
-#   upgrade_requirements  	upgrade *requirements.txt files without installing
-#   upgrade_all           	upgrade uv, *requirements.txt and install packages
-#   sync                  	synchronize venv with dev-requirements.txt
-#   list                  	show list of installed packages in the venv
-#   test                  	run unittests
-#   coverage			 	run unittests with coverage and make report
-#   build                 	build package
+#   init                    initial setup virtual env
+#   upgrade_uv              upgrade uv
+#   upgrade_requirements    upgrade *requirements.txt files without installing
+#   upgrade_all             upgrade uv, *requirements.txt and install packages
+#   sync                    synchronize venv with dev-requirements.txt
+#   list                    show list of installed packages in the venv
+#   test                    run unittests
+#   coverage                run unittests with coverage and make report
+#   build                   build package
 
 # project / build properties
 PACKAGE := {{ cookiecutter.package_name }}

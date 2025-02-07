@@ -3,13 +3,13 @@
 #
 
 # Make targets:
-#   init                  initial setup virtual env
-#   upgrade_uv            upgrade uv
-#   upgrade_requirements  upgrade *requirements.txt files without installing
-#   upgrade_all           upgrade uv, *requirements.txt and install packages
-#   sync                  synchronize venv with dev-requirements.txt
-#   list                  show list of installed packages in the venv
-#   build                 build executable
+#   init                    initial setup virtual env
+#   upgrade_uv              upgrade uv
+#   upgrade_requirements    upgrade *requirements.txt files without installing
+#   upgrade_all             upgrade uv, *requirements.txt and install packages
+#   sync                    ynchronize venv with dev-requirements.txt
+#   list                    show list of installed packages in the venv
+#   build                   build executable
 
 # project / build properties
 SCRIPT_NAME := {{ cookiecutter.repo_name }}

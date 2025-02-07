@@ -3,12 +3,12 @@
 #
 
 # Make targets:
-#   init                  initial setup virtual env
-#   upgrade_uv            upgrade uv
-#   upgrade_requirements  upgrade requirements.txt files without installing
-#   upgrade_all           upgrade uv, requirements.txt and installed packages
-#   sync                  synchronize venv with requirements.txt
-#   list                  show list of installed packages in the venv
+#   init                    initial setup virtual env
+#   upgrade_uv              upgrade uv
+#   upgrade_requirements    upgrade requirements.txt files without installing
+#   upgrade_all             upgrade uv, requirements.txt and installed packages
+#   sync                    synchronize venv with requirements.txt
+#   list                    show list of installed packages in the venv
 
 # names (directories & files)
 VENV_DIR := .venv

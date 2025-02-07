@@ -7,10 +7,10 @@ description = "{{ cookiecutter.app_description }}"
 requires-python = "=={{ cookiecutter.python_version }}"
 classifiers = [
     "Development Status :: 1 - Planning",
-    "Private :: Do Not Upload",
-    "Programming Language :: Python :: 3",
     "License :: Other/Proprietary License",
     "Operating System :: Microsoft :: Windows",
+    "Private :: Do Not Upload",
+    "Programming Language :: Python :: 3",
 ]
 dependencies = [
     "click",

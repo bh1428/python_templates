@@ -6,10 +6,10 @@ readme = "README.md"
 requires-python = "=={{ cookiecutter.python_version }}"
 classifiers = [
     "Development Status :: 1 - Planning",
-    "Private :: Do Not Upload",
-    "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
     "Operating System :: Microsoft :: Windows",
+    "Private :: Do Not Upload",
+    "Programming Language :: Python :: 3",
 ]
 dependencies = [
 ]

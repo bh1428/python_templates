@@ -5,7 +5,5 @@
     "repo_version": "{% arrow_now 'local', 'YYYY.M.D' %}",
     "repo_author": "Ben Hattem",
     "repo_author_email": "benghattem@gmail.com",
-    "_extensions": [
-        "extensions.ArrowNowExtension"
-    ]
+    "_extensions": ["extensions.ArrowNowExtension"]
 }
