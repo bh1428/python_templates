@@ -27,3 +27,7 @@ path = "VERSION"
 
 [tool.uv]
 link-mode = "copy"
+
+[tool.uv.pip]
+annotation-style = "line"
+universal = true
