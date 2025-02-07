@@ -8,6 +8,8 @@ authors = [
 requires-python = "=={{ cookiecutter.python_version }}"
 classifiers = [
     "Development Status :: 1 - Planning",
+    "License :: Other/Proprietary License",
+    "Private :: Do Not Upload",
     "Programming Language :: Python :: 3",
 ]
 dependencies = [
