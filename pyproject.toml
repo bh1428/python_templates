@@ -31,3 +31,14 @@ link-mode = "copy"
 [tool.uv.pip]
 annotation-style = "line"
 universal = true
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+exclude = [
+    "vscode",
+    "windows_package",
+    "windows_qt",
+    "windows_standalone_exe",
+]
+

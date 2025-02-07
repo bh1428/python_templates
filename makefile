@@ -2,7 +2,7 @@
 # makefile for python_templates
 #
 
-# Make targets (can be used when calling make):
+# Make targets:
 #   init                  initial setup virtual env
 #   upgrade_uv            upgrade uv
 #   upgrade_requirements  upgrade requirements.txt files without installing
