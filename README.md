@@ -15,7 +15,7 @@ On Windows, you can use the PowerShell script `cookiecutter.ps1` to create new p
   - Run `cookiecutter.ps1` and use the menu to select the template
 
 ## uv / pip-tools
-Initially the templates were based on the wonderful [pip-tools](https://pip-tools.readthedocs.io/en/latest/). However the world is changed when [uv](https://docs.astral.sh/uv/) was released and although the workflow from `pip-tools` is still valid, the speed of `uv` makes handling packages and virtual environments a lot more convenient. Currently the templates are based on [uv](https://docs.astral.sh/uv/) although a workflow comparable to [pip-tools](https://pip-tools.readthedocs.io/en/latest/) is still implemented. In short:
+Initially the templates were based on the wonderful [pip-tools](https://pip-tools.readthedocs.io/en/latest/). However, the release of [uv](https://docs.astral.sh/uv/) changed the world. While the workflow from `pip-tools` remains valid, the speed and convenience of `uv` make handling packages and virtual environments much more efficient. Currently, the templates are based on [uv](https://docs.astral.sh/uv/), but a workflow comparable to [pip-tools](https://pip-tools.readthedocs.io/en/latest/) is still implemented. In short:
   * `pyproject.toml` contains a list of prerequisites (`project.dependencies` and/or `project.optional-dependencies`).
   * `pyproject.toml` fixes the Python version to a patch release (e.g. 3.13.1).
   * `uv venv` creates a virtual environment (comparable to `python -m venv`).
