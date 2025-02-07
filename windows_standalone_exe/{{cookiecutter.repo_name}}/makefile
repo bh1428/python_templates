@@ -11,11 +11,6 @@
 #   list                  show list of installed packages in the venv
 #   build                 build executable
 
-SHELL := powershell.exe
-.SHELLFLAGS := -NoProfile -Command
-OUT_NEW := | Out-File -Encoding utf8
-OUT_APP := | Out-File -Encoding utf8 -Append
-
 # project / build properties
 SCRIPT_NAME := {{ cookiecutter.repo_name }}
 ICON_FILE := images/python.ico
@@ -27,6 +22,10 @@ PRE_BUILD_CLEAN := @("$(BUILD_DIR)", "$(BUILD_TARGET_DIR)", "$(SCRIPT_NAME).spec
 CMDLINE_OPTIONS := cmdline_options.txt
 
 # binaries / executables
+SHELL := powershell.exe
+.SHELLFLAGS := -NoProfile -Command
+OUT_NEW := | Out-File -Encoding default
+OUT_APP := | Out-File -Encoding default -Append
 UV := uv
 VENV := .\$(VENV_DIR)\Scripts
 VENV_ACTIVATE := $(VENV)\activate.ps1

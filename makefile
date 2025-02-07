@@ -20,13 +20,13 @@ VERSION_FILE := VERSION
 ifeq ($(OS),Windows_NT)
 	SHELL := powershell.exe
 	.SHELLFLAGS := -NoProfile -Command
-	STDOUT_TO_FILE := | Out-File -Encoding utf8
+	OUT_NEW := | Out-File -Encoding default
 	VENV := .\$(VENV_DIR)\Scripts
 	VENV_ACTIVATE := $(VENV)\activate.bat
 	VENV_PYTHON := $(VENV)\python.exe
 else
 	SHELL := bash
-	STDOUT_TO_FILE := >
+	OUT_NEW := >
 	VENV := ./$(VENV_DIR)/bin
 	VENV_ACTIVATE := $(VENV)/activate
 	VENV_PYTHON := $(VENV)/python
@@ -70,4 +70,4 @@ list: $(VENV_ACTIVATE)
 .PHONY: build
 build: $(VENV_ACTIVATE) dot_gitignore.jinja2 update_gitignore.py
 	$(VENV_PYTHON) update_gitignore.py
-	$(VENV_PYTHON) -c "import datetime as dt; dq=chr(34); d=dt.date.today(); print(f'VERSION={dq}{d.year:d}.{d.month:d}.{d.day:d}{dq}')" $(STDOUT_TO_FILE) "$(VERSION_FILE)"
+	$(VENV_PYTHON) -c "import datetime as dt; dq=chr(34); d=dt.date.today(); print(f'VERSION={dq}{d.year:d}.{d.month:d}.{d.day:d}{dq}')" $(OUT_NEW) "$(VERSION_FILE)"
