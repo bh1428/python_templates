@@ -84,15 +84,15 @@ test: $(VENV_ACTIVATE)
 .PHONY: coverage
 coverage: $(VENV_ACTIVATE)
 	$(VENV_PYTHON) -m coverage erase
-	if (Test-Path -LiteralPath "$(COVERAGE_HTML)") { Remove-Item -LiteralPath "$(COVERAGE_HTML)" -Force -Recurse }
+	if (Test-Path -LiteralPath $(COVERAGE_HTML)) { Remove-Item -LiteralPath $(COVERAGE_HTML) -Force -Recurse }
 	$(PYTEST) --cov=$(PACKAGE) tests
-	$(VENV_PYTHON) -m coverage html -d "$(COVERAGE_HTML)"
-	start "$(COVERAGE_HTML)\index.html"
+	$(VENV_PYTHON) -m coverage html -d $(COVERAGE_HTML)
+	start $(COVERAGE_HTML)\index.html
 
 .PHONY: build
 build: $(VENV_ACTIVATE)
 	foreach ($$item in $(PRE_BUILD_CLEAN)) { if (Test-Path -LiteralPath $$item) { Remove-Item -LiteralPath $$item -Force -Recurse }}
 	$(VENV_PYTHON) -m build --wheel
-	$(VENV_PYTHON) -c "import sys; import datetime; print(f'Python {sys.version}'); print(f'Build time: {datetime.datetime.now().astimezone()}\n')" $(OUT_NEW) "$(BUILD_INFO)"
-	$(UV) pip list $(OUT_APP) "$(BUILD_INFO)"
-	Move-Item -LiteralPath "$(BUILD_INFO)" -Destination "$(BUILD_TARGET_DIR)"
+	$(VENV_PYTHON) -c "import sys; import datetime; print(f'Python {sys.version}'); print(f'Build time: {datetime.datetime.now().astimezone()}\n')" $(OUT_NEW) $(BUILD_INFO)
+	$(UV) pip list $(OUT_APP) $(BUILD_INFO)
+	Move-Item -LiteralPath $(BUILD_INFO) -Destination $(BUILD_TARGET_DIR)

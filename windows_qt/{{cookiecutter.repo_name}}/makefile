@@ -74,14 +74,14 @@ list: $(VENV_ACTIVATE)
 
 .PHONY: qt_designer
 qt_designer: $(VENV_ACTIVATE)
-	$(QT_DESIGNER) "$(SCRIPT_NAME).ui"
+	$(QT_DESIGNER) $(SCRIPT_NAME).ui
 
 $(SCRIPT_NAME)_ui.py: $(SCRIPT_NAME).ui
-	$(PYSIDE6_UIC) -o "$(SCRIPT_NAME)_ui.py" "$(SCRIPT_NAME).ui"
+	$(PYSIDE6_UIC) -o $(SCRIPT_NAME)_ui.py $(SCRIPT_NAME).ui
 
 $(SCRIPT_NAME)_rc.py: $(SCRIPT_NAME).qrc $(ICON_FILE)
-	$(PYSIDE6_RCC) -o "$(SCRIPT_NAME)_rc.py" "$(SCRIPT_NAME).qrc"
+	$(PYSIDE6_RCC) -o $(SCRIPT_NAME)_rc.py $(SCRIPT_NAME).qrc
 
 .PHONY: run
 run: $(VENV_ACTIVATE) $(SCRIPT_NAME)_ui.py $(SCRIPT_NAME)_rc.py
-	$(VENV_PYTHON) "$(SCRIPT_NAME).py"
+	$(VENV_PYTHON) $(SCRIPT_NAME).py

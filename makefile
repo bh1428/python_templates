@@ -70,4 +70,4 @@ list: $(VENV_ACTIVATE)
 .PHONY: build
 build: $(VENV_ACTIVATE) dot_gitignore.jinja2 update_gitignore.py
 	$(VENV_PYTHON) update_gitignore.py
-	$(VENV_PYTHON) -c "import datetime as dt; dq=chr(34); d=dt.date.today(); print(f'VERSION={dq}{d.year:d}.{d.month:d}.{d.day:d}{dq}')" $(OUT_NEW) "$(VERSION_FILE)"
+	$(VENV_PYTHON) -c "import datetime as dt; dq=chr(34); d=dt.date.today(); print(f'VERSION={dq}{d.year:d}.{d.month:d}.{d.day:d}{dq}')" $(OUT_NEW) $(VERSION_FILE)
