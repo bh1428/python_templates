@@ -4,8 +4,12 @@
     },
     "cSpell.words": [
         "cookiecutter",
+        "ifeq",
         "levelname",
+        "libiconv",
+        "libintl",
         "msecs",
+        "pyinstaller",
         "pylint",
         "pyproject",
         "setuptools",
