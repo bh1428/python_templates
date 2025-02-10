@@ -3,7 +3,7 @@ name = "{{ cookiecutter.package_name }}"
 description = "{{ cookiecutter.package_description }}"
 authors = [{ name = "{{ cookiecutter.copyright_author }}", email = "{{ cookiecutter.author_email }}" }]
 readme = "README.md"
-requires-python = "=={{ cookiecutter.python_version }}"
+requires-python = ">=3.13"
 classifiers = [
     "Development Status :: 1 - Planning",
     "License :: OSI Approved :: MIT License",

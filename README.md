@@ -28,10 +28,10 @@ Initially the templates were based on the wonderful [pip-tools](https://pip-tool
 - `pyproject.toml` contains a list of prerequisites (`project.dependencies` and/or `project.optional-dependencies`).
 - `pyproject.toml` fixes the Python version to a patch release (e.g. 3.13.1).
 - `uv venv` creates a virtual environment (comparable to `python -m venv`).
-- `uv pip compile` is used to pin package versions in `requirements.txt` and/or `dev-requirements.txt` (comparable to `pip-compile`).
+- `uv pip compile` is used to pin package versions in `requirements.txt` and/or `dev-requirements.txt` (comparable to `pip-compile`). This also means you can still do a `pip install -r requirements.txt`.
 - `uv pip sync` keeps the virtual environment in sync with the pinned versions either in `requirements.txt` or `dev-requirements.txt` (comparable to `pip-sync`).
 
-Note: things like `.python-version` or `uv.lock` are not used. If you have a previously created `requirements.txt` you can still do a `pip install -r requirements.txt`.
+Note: in general things like `.python-version` or `uv.lock` are not used. In most cases the Python version is pinned via `requires-python` in the `pyproject.toml`. The exception here is the *windows_package* template. It does not make much sense to pin a package to a specific Python version, so here a `.python-version` is used (but still no `uv.lock`).
 
 ## make
 
@@ -43,7 +43,9 @@ Templates 'abuse' `make` for managing the virtual environment and/or building an
   - `bin/libiconv2.dll`
   - `bin/libintl3.dll`
 
- For documentation: the [Documentation](http://gnuwin32.sourceforge.net/downlinks/make-doc-zip.php) zip contains an excellent `make.pdf` with everything you ever want to know about `make`.
+For documentation: the [Documentation](http://gnuwin32.sourceforge.net/downlinks/make-doc-zip.php) zip contains an excellent `make.pdf` with everything you ever want to know about `make`.
+
+If you want a bit more modern `make` you can use the version from [Chocolatey](https://community.chocolatey.org/packages/make) or directly (e.g. [https://bitbucket.org/xoviat/chocolatey-packages/src/master/make/4.4.1/tools/install/bin/make.exe](https://bitbucket.org/xoviat/chocolatey-packages/src/master/make/4.4.1/tools/install/bin/make.exe))
 
 Please note: in a `makefile` a `<TAB>` has a different meaning than one or more `<SPACE>`s:
 

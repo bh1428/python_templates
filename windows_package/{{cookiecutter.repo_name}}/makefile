@@ -15,6 +15,7 @@
 
 # project / build properties
 PACKAGE := {{ cookiecutter.package_name }}
+PYTHON_VERSION := {{ cookiecutter.python_version }}
 VENV_DIR := .venv
 BUILD_DIR := build
 BUILD_TARGET_DIR := dist
@@ -40,6 +41,7 @@ all: build
 init: $(VENV_ACTIVATE)
 
 $(VENV_ACTIVATE):
+	$(UV) python pin $(PYTHON_VERSION)
 	$(UV) venv
     ifeq (,$(wildcard requirements.txt))
 		$(UV) pip compile pyproject.toml -o requirements.txt
