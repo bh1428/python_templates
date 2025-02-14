@@ -94,7 +94,7 @@ coverage: $(VENV_ACTIVATE)
 .PHONY: build
 build: $(VENV_ACTIVATE)
 	foreach ($$item in $(PRE_BUILD_CLEAN)) { if (Test-Path -LiteralPath $$item) { Remove-Item -LiteralPath $$item -Force -Recurse }}
-	$(VENV_PYTHON) -m build --wheel
+	$(UV) build --wheel
 	$(VENV_PYTHON) -c "import sys; import datetime; print(f'Python {sys.version}'); print(f'Build time: {datetime.datetime.now().astimezone()}\n')" $(OUT_NEW) $(BUILD_INFO)
 	$(UV) pip list $(OUT_APP) $(BUILD_INFO)
 	Move-Item -LiteralPath $(BUILD_INFO) -Destination $(BUILD_TARGET_DIR)
