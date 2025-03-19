@@ -5,6 +5,7 @@
 # Versions:                                                                             #
 #  1.0    2025-03-19  BHA  initial version                                              #
 #  1.0.1  2025-03-19  BHA  minor refactoring                                            #
+#  1.0.2  2025-03-19  BHA  change purple colors back to normal                          #
 #                                                                                       #
 # Purpose: menu for a makefile (every .PHONY target becomes an antry)                   #
 #                                                                                       #
@@ -14,7 +15,7 @@
 # CONFIGURATION
 #
 $config = [PSCustomObject]@{
-    'version'    = '1.0.1'
+    'version'    = '1.0.2'
     'scriptName' = $([io.path]::GetFileNameWithoutExtension($MyInvocation.MyCommand.Name))
 }
 
@@ -24,8 +25,8 @@ $config = [PSCustomObject]@{
 #
 function Set-HostColors {
     $colors = @{
-        'background' = 'DarkMagenta'
-        'foreground' = 'DarkYellow'
+        'background' = 'Black'
+        'foreground' = 'Gray'
         'error'      = 'Red'
         'highlight'  = 'Yellow'
     }
@@ -41,6 +42,7 @@ function Set-HostColors {
     $Host.PrivateData.VerboseBackgroundColor = $colors.background
     $Host.PrivateData.ProgressForegroundColor = $colors.highlight
     $Host.PrivateData.ProgressBackgroundColor = $colors.background
+    Clear-Host
 }
 
 
