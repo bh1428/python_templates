@@ -4,6 +4,7 @@
 #                                                                                       #
 # Versions:                                                                             #
 #  1.0    2025-03-19  BHA  initial version                                              #
+#  1.0.1  2025-03-19  BHA  minor refactoring                                            #
 #                                                                                       #
 # Purpose: menu for a makefile (every .PHONY target becomes an antry)                   #
 #                                                                                       #
@@ -13,7 +14,7 @@
 # CONFIGURATION
 #
 $config = [PSCustomObject]@{
-    'version'    = '1.0'
+    'version'    = '1.0.1'
     'scriptName' = $([io.path]::GetFileNameWithoutExtension($MyInvocation.MyCommand.Name))
 }
 
@@ -164,10 +165,9 @@ function Read-AnyKey {
     Write-Host -NoNewline $Prompt
     # ignore keys like Alt, Ctrl, Shift, Tab, etc...
     $ignoreKeys = @(
-        9, 16, 17, 18, 20, 91, 92, 93, 144, 145,
-        166, 167, 168, 169, 170, 171, 172, 173,
-        174, 175, 176, 177, 178, 179, 180, 181, 182, 183
-    ) | ForEach-Object { [int]$_ } | Sort-Object -Unique
+        9, 16, 17, 18, 20, 91, 92, 93, 144, 145, 166, 167, 168, 169, 170,
+        171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183
+    )
     $keyPress = $null
     while ($null -eq $keyPress.VirtualKeyCode -or $ignoreKeys -contains $keyPress.VirtualKeyCode) {
         $keyPress = $Host.UI.RawUI.ReadKey('NoEcho, IncludeKeyDown')
