@@ -33,6 +33,7 @@ VERSION             text
 # Linux files which always have LF line endings at checkout
 #
 *requirements.txt   text eol=lf
+*.sh                text eol=lf
 
 #
 # Never perform LF normalization
