@@ -6,6 +6,7 @@
 #  1.0    2025-03-19  BHA  initial version                                              #
 #  1.0.1  2025-03-19  BHA  minor refactoring                                            #
 #  1.0.2  2025-03-19  BHA  change purple colors back to normal                          #
+#  1.0.3  2025-03-20  BHA  do not set colors at all                                     #
 #                                                                                       #
 # Purpose: menu for a makefile (every .PHONY target becomes an antry)                   #
 #                                                                                       #
@@ -15,7 +16,7 @@
 # CONFIGURATION
 #
 $config = [PSCustomObject]@{
-    'version'    = '1.0.2'
+    'version'    = '1.0.3'
     'scriptName' = $([io.path]::GetFileNameWithoutExtension($MyInvocation.MyCommand.Name))
 }
 
@@ -227,7 +228,6 @@ function Invoke-MakeMenu {
     $menuPosition = 0
     $exitNotChosen = $true
     $prompt = "$($config.scriptName) (V$($config.version)) - choose 'make' action ('x'=exit):"
-    Set-HostColors
     while ($exitNotChosen) {
         Clear-Host
         $choice = Get-MenuSelection -MenuItems $Menu.Keys -MenuPrompt $prompt `
