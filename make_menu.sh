@@ -2,6 +2,23 @@
 set -euo pipefail
 IFS=$'\n\t'
 
+#########################################################################################
+# Name: make_menu.sh                                                                    #
+# Author: Ben Hattem (benghattem@gmail.com)                                             #
+#                                                                                       #
+# Versions:                                                                             #
+#  1.0    2025-03-20  BHA  initial version                                              #
+#                                                                                       #
+# Purpose: menu for a makefile (every .PHONY target becomes an entry)                   #
+#                                                                                       #
+#########################################################################################
+version=1.0
+
+#
+# FUNCTIONS
+#
+
+# create a whiptail menu with an acceptable size for a list opf entries
 function menu() {
     local title="$1"
     shift
@@ -52,16 +69,28 @@ function menu() {
     echo "${selection}"
 }
 
-# main
+#
+# MAIN
+#
+
+# get makefile targets (all .PHONY entries)
 mapfile -t make_targets < <(grep "^\.PHONY:" makefile | awk -F': ' '{print $2}')
+if [ ${#make_targets[@]} -eq 0 ]; then
+    echo "ERROR: no make targets found"
+    exit 1
+fi
+
+# run menu
 while true; do
-    choice=$(menu "Make menu" "Choose a 'make' target:" "${make_targets[@]}")
+    choice=$(menu "Make menu (V${version})" "Choose a 'make' target:" "${make_targets[@]}")
     if [ -z "$choice" ]; then
         break
     fi
     clear
+    set +e
     make "$choice"
+    set -e
     echo
-    read -p "Press Enter to continue..."
+    read -r -p "Press Enter to continue..."
 done
 

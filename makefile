@@ -48,6 +48,9 @@ $(VENV_ACTIVATE):
 requirements.txt: $(VENV_ACTIVATE) pyproject.toml
 	$(UV) pip compile pyproject.toml -o requirements.txt
 
+.PHONY: upgrade_all
+upgrade_all: upgrade_uv upgrade_requirements sync
+
 .PHONY: upgrade_uv
 upgrade_uv: $(VENV_ACTIVATE)
 	$(UV) self update
@@ -59,9 +62,6 @@ upgrade_requirements: $(VENV_ACTIVATE)
 .PHONY: sync
 sync: $(VENV_ACTIVATE) requirements.txt
 	$(UV) pip sync requirements.txt
-
-.PHONY: upgrade_all
-upgrade_all: upgrade_uv upgrade_requirements sync
 
 .PHONY: list
 list: $(VENV_ACTIVATE)

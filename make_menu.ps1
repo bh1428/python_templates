@@ -8,7 +8,7 @@
 #  1.0.2  2025-03-19  BHA  change purple colors back to normal                          #
 #  1.0.3  2025-03-20  BHA  do not set colors at all                                     #
 #                                                                                       #
-# Purpose: menu for a makefile (every .PHONY target becomes an antry)                   #
+# Purpose: menu for a makefile (every .PHONY target becomes an entry)                   #
 #                                                                                       #
 #########################################################################################
 
