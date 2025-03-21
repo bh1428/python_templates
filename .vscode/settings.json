@@ -13,7 +13,11 @@
         "pyinstaller",
         "pylint",
         "pyproject",
+        "rawui",
+        "readkey",
         "setuptools",
-        "VENV"
+        "VENV",
+        "virt",
+        "virtualkeycode"
     ]
 }

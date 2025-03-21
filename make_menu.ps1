@@ -7,6 +7,7 @@
 #  1.0.1  2025-03-19  BHA  minor refactoring                                            #
 #  1.0.2  2025-03-19  BHA  change purple colors back to normal                          #
 #  1.0.3  2025-03-20  BHA  do not set colors at all                                     #
+#  1.0.4  2025-03-21  BHA  fix situation where no or only one make target is found      #
 #                                                                                       #
 # Purpose: menu for a makefile (every .PHONY target becomes an entry)                   #
 #                                                                                       #
@@ -16,7 +17,7 @@
 # CONFIGURATION
 #
 $config = [PSCustomObject]@{
-    'version'    = '1.0.3'
+    'version'    = '1.0.4'
     'scriptName' = $([io.path]::GetFileNameWithoutExtension($MyInvocation.MyCommand.Name))
 }
 
@@ -97,14 +98,14 @@ function Get-MenuSelection {
         $multiSelectPos = $MenuLineStart.Length + 1
         $multiSelNotMarked = ' ' * $MultiSelMarker.Length
     }
-    $Menu = $MenuItems | ForEach-Object {
-        $menuLine = $MenuLineStart
-        if ($MultiSelect) {
-            $menuLine += "[$multiSelNotMarked] "
-        }
-        $menuLine += "$_ " + (' ' * ($maxLineLength - $_.Length))
-        $menuLine
-    }
+    $Menu = @($MenuItems | ForEach-Object {
+            $menuLine = $MenuLineStart
+            if ($MultiSelect) {
+                $menuLine += "[$multiSelNotMarked] "
+            }
+            $menuLine += "$_ " + (' ' * ($maxLineLength - $_.Length))
+            $menuLine
+        })
 
     # start menu
     $exitWithoutChoice = $false
@@ -116,7 +117,7 @@ function Get-MenuSelection {
         $keyPress = $host.ui.rawui.readkey('NoEcho,IncludeKeyDown')
         $virtKey = $keyPress.virtualkeycode
 
-        # handle keypress
+        # handle key press
         switch ($virtKey) {
             { $_ -in 37..38 } { if ($pos -gt 0) { $pos-- } }  # Left/Up
             { $_ -in 39..40 } { if ($pos -lt $MenuItems.Count - 1) { $pos++ } }  # Right/Down
@@ -202,9 +203,9 @@ function New-MakeMenu {
     if (-not (Test-Path $Makefile)) {
         throw "-Makefile: '${Makefile}' not found"
     }
-    $phonies = Select-String -Path $Makefile -Pattern '^\s*\.PHONY:\s*(.+)' |
-        ForEach-Object { $($_.Matches[0] -split '\s+')[1] } |
-        Select-Object -Unique
+    $phonies = @(Select-String -Path $Makefile -Pattern '^\s*\.PHONY:\s*(.+)' |
+            ForEach-Object { $($_.Matches[0] -split '\s+')[1] } |
+            Select-Object -Unique)
     $fastChoices = '123456789abcdefghijklmnopqrstuvw'
     $menu = [ordered]@{}
     for ($i = 0; $i -lt $phonies.Length; $i++) {
@@ -252,8 +253,11 @@ function Invoke-MakeMenu {
 try {
     $ErrorActionPreference = 'Continue'
 
-    $menu = New-MakeMenu 
-    Invoke-MakeMenu -Menu $menu
+    $makeMenu = New-MakeMenu
+    if ($makeMenu.Count -eq 0) {
+        throw 'No make targets found.'
+    }
+    Invoke-MakeMenu -Menu $makeMenu
 } catch {
     Write-Host "`nGot an unhandled error (execution will be stopped):"
     Write-Host -ForegroundColor Red $_
