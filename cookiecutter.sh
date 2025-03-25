@@ -7,12 +7,13 @@ IFS=$'\n\t'
 # Author: Ben Hattem (benghattem@gmail.com)                                             #
 #                                                                                       #
 # Versions:                                                                             #
-#  1.0    2025-03-25  BHA  initial VERSION                                              #
+#  1.0    2025-03-25  BHA  initial version                                              #
+#  1.0.1  2025-03-25  BHA  minor refactoring                                            #
 #                                                                                       #
 # Purpose: use cookiecutter to create a project from a template                         #
 #                                                                                       #
 #########################################################################################
-VERSION=1.0
+VERSION="1.0.1"
 TEMPLATE_DIR="${HOME}/python_templates"
 COOKIECUTTER="${HOME}/python-base/.venv/bin/cookiecutter"
 
@@ -29,13 +30,12 @@ function menu() {
     local -a items=("$@")
 
     # ensure there are items provided
-    if [ ${#@} -eq 0 ]; then
-        echo "ERROR: no items provided for the menu"
+    if [ ${#items[@]} -eq 0 ]; then
+        echo "ERROR: no items provided for the menu."
         return 1
     fi
 
     # initialize whiptail tag and item combinations (item is empty)
-    local -a items=("$@")
     local -a whiptail_items=()
     for item in "${items[@]}"; do
         whiptail_items+=("$item")
@@ -52,16 +52,14 @@ function menu() {
     local num_items=${#items[@]}
     local items_height=$((num_items > max_items_height ? max_items_height : num_items))
     local menu_height=$((items_height + max_menu_height - max_items_height))
-    local menu_height=$((menu_height > max_menu_height ? max_menu_height : menu_height))
+    menu_height=$((menu_height > max_menu_height ? max_menu_height : menu_height))
 
     #  determine width based on prompt and longest item text
-    local item
-    local item_width
     local largest_width=$((${#prompt} + 4))
     local title_width=$((${#title} + 6))
     largest_width=$((title_width > largest_width ? title_width : largest_width))
     for item in "${items[@]}"; do
-        item_width=$((${#item} + 5))
+        local item_width=$((${#item} + 5))
         largest_width=$((item_width > largest_width ? item_width : largest_width))
     done
     local width=$((largest_width > max_width ? max_width : largest_width))
@@ -70,20 +68,19 @@ function menu() {
     # show menu
     local selection
     selection=$(whiptail --title "${title}" --menu "${prompt}" ${menu_height} ${width} ${items_height} "${whiptail_items[@]}" 3>&1 1>&2 2>&3)
+
     echo "${selection}"
-    return 0
 }
 
 function gather_templates() {
     local basedir="$1"
     local repo_name
     for dir in "${basedir}"/*/; do
-        if [[ -f "${dir}cookiecutter.json" ]]; then
+        if [ -f "${dir}cookiecutter.json" ]; then
             repo_name=$(grep -oP '"repo_name":\s*"\K[^"]+' "${dir}cookiecutter.json")
             TEMPLATES["$repo_name"]="${dir%/}"
         fi
     done
-    return 0
 }
 
 #
@@ -106,11 +103,13 @@ while true; do
         clear
         break
     fi
+
     clear
     echo "Creating project for template: ${choice}"
     set +e
     "${COOKIECUTTER}" "${TEMPLATES[$choice]}"
     set -e
+
     echo
     read -r -p "Press Enter to continue..."
 done

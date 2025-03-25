@@ -9,11 +9,12 @@ IFS=$'\n\t'
 # Versions:                                                                             #
 #  1.0    2025-03-20  BHA  initial version                                              #
 #  1.0.1  2025-03-25  BHA  use width of title in menu width as well                     #
+#  1.0.2  2025-03-25  BHA  minor refactoring                                            #
 #                                                                                       #
 # Purpose: menu for a makefile (every .PHONY target becomes an entry)                   #
 #                                                                                       #
 #########################################################################################
-VERSION=1.0.1
+VERSION="1.0.2"
 
 #
 # FUNCTIONS
@@ -28,13 +29,12 @@ function menu() {
     local -a items=("$@")
 
     # ensure there are items provided
-    if [ ${#@} -eq 0 ]; then
+    if [ ${#items[@]} -eq 0 ]; then
         echo "ERROR: no items provided for the menu."
         return 1
     fi
 
     # initialize whiptail tag and item combinations (item is empty)
-    local -a items=("$@")
     local -a whiptail_items=()
     for item in "${items[@]}"; do
         whiptail_items+=("$item")
@@ -51,16 +51,14 @@ function menu() {
     local num_items=${#items[@]}
     local items_height=$((num_items > max_items_height ? max_items_height : num_items))
     local menu_height=$((items_height + max_menu_height - max_items_height))
-    local menu_height=$((menu_height > max_menu_height ? max_menu_height : menu_height))
+    menu_height=$((menu_height > max_menu_height ? max_menu_height : menu_height))
 
     #  determine width based on prompt and longest item text
-    local item
-    local item_width
     local largest_width=$((${#prompt} + 4))
     local title_width=$((${#title} + 6))
     largest_width=$((title_width > largest_width ? title_width : largest_width))
     for item in "${items[@]}"; do
-        item_width=$((${#item} + 5))
+        local item_width=$((${#item} + 5))
         largest_width=$((item_width > largest_width ? item_width : largest_width))
     done
     local width=$((largest_width > max_width ? max_width : largest_width))
@@ -69,6 +67,7 @@ function menu() {
     # show menu
     local selection
     selection=$(whiptail --title "${title}" --menu "${prompt}" ${menu_height} ${width} ${items_height} "${whiptail_items[@]}" 3>&1 1>&2 2>&3)
+
     echo "${selection}"
 }
 
@@ -90,10 +89,12 @@ while true; do
         clear
         break
     fi
+
     clear
     set +e
     make "$choice"
     set -e
+
     echo
     read -r -p "Press Enter to continue..."
 done
