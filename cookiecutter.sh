@@ -3,17 +3,18 @@ set -euo pipefail
 IFS=$'\n\t'
 
 #########################################################################################
-# Name: make_menu.sh                                                                    #
+# Name: cookiecutter.sh                                                                 #
 # Author: Ben Hattem (benghattem@gmail.com)                                             #
 #                                                                                       #
 # Versions:                                                                             #
-#  1.0    2025-03-20  BHA  initial version                                              #
-#  1.0.1  2025-03-25  BHA  use width of title in menu width as well                     #
+#  1.0    2025-03-25  BHA  initial VERSION                                              #
 #                                                                                       #
-# Purpose: menu for a makefile (every .PHONY target becomes an entry)                   #
+# Purpose: use cookiecutter to create a project from a template                         #
 #                                                                                       #
 #########################################################################################
-VERSION=1.0.1
+VERSION=1.0
+TEMPLATE_DIR="${HOME}/python_templates"
+COOKIECUTTER="${HOME}/python-base/.venv/bin/cookiecutter"
 
 #
 # FUNCTIONS
@@ -29,7 +30,7 @@ function menu() {
 
     # ensure there are items provided
     if [ ${#@} -eq 0 ]; then
-        echo "ERROR: no items provided for the menu."
+        echo "ERROR: no items provided for the menu"
         return 1
     fi
 
@@ -70,29 +71,45 @@ function menu() {
     local selection
     selection=$(whiptail --title "${title}" --menu "${prompt}" ${menu_height} ${width} ${items_height} "${whiptail_items[@]}" 3>&1 1>&2 2>&3)
     echo "${selection}"
+    return 0
+}
+
+function gather_templates() {
+    local basedir="$1"
+    local repo_name
+    for dir in "${basedir}"/*/; do
+        if [[ -f "${dir}cookiecutter.json" ]]; then
+            repo_name=$(grep -oP '"repo_name":\s*"\K[^"]+' "${dir}cookiecutter.json")
+            TEMPLATES["$repo_name"]="${dir%/}"
+        fi
+    done
+    return 0
 }
 
 #
 # MAIN
 #
 
-# get makefile targets (all .PHONY entries)
-mapfile -t make_targets < <(grep "^\.PHONY:" makefile | awk -F': ' '{print $2}')
-if [ ${#make_targets[@]} -eq 0 ]; then
-    echo "ERROR: no make targets found"
+# gather templates
+declare -A TEMPLATES
+gather_templates "${TEMPLATE_DIR}" # result is in TEMPLATES
+repo_names=() && repo_names=("${!TEMPLATES[@]}")
+if [ ${#repo_names[@]} -eq 0 ]; then
+    echo "ERROR: no templates found in: '${TEMPLATE_DIR}'"
     exit 1
 fi
 
 # run menu
 while true; do
-    choice=$(menu "Make menu (V${VERSION})" "Choose a 'make' target:" "${make_targets[@]}")
+    choice=$(menu "Cookiecutter (V${VERSION})" "Choose a template:" "${repo_names[@]}")
     if [ -z "$choice" ]; then
         clear
         break
     fi
     clear
+    echo "Creating project for template: ${choice}"
     set +e
-    make "$choice"
+    "${COOKIECUTTER}" "${TEMPLATES[$choice]}"
     set -e
     echo
     read -r -p "Press Enter to continue..."
