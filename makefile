@@ -36,6 +36,7 @@ all: build
 
 .NOTPARALLEL:
 
+.PHONY: init
 init: $(VENV_ACTIVATE)
 
 $(VENV_ACTIVATE):
