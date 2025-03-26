@@ -9,7 +9,8 @@
         "**/__pycache__": true,
         "**/.git": true,
         "**/.venv": true,
-        "**/.vscode": true
+        "**/.vscode": true,
+        "**/.ruff_cache": true
     },
     "pylint.importStrategy": "useBundled",
     "ruff.importStrategy": "useBundled",
