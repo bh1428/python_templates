@@ -10,7 +10,6 @@
 #   sync                    synchronize venv with requirements.txt
 #   list                    show list of installed packages in the venv
 
-
 VENV_DIR := .venv
 UV := uv
 ifeq ($(OS),Windows_NT)
