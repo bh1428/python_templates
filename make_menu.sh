@@ -10,11 +10,12 @@ IFS=$'\n\t'
 #  1.0    2025-03-20  BHA  initial version                                              #
 #  1.0.1  2025-03-25  BHA  use width of title in menu width as well                     #
 #  1.0.2  2025-03-25  BHA  minor refactoring                                            #
+#  1.0.3  2025-04-23  BHA  adapt colors                                                 #
 #                                                                                       #
 # Purpose: menu for a makefile (every .PHONY target becomes an entry)                   #
 #                                                                                       #
 #########################################################################################
-VERSION="1.0.2"
+VERSION="1.0.3"
 
 #
 # FUNCTIONS
@@ -74,6 +75,19 @@ function menu() {
 #
 # MAIN
 #
+
+# colors for whiptail (e.g. override '/etc/newt/palette')
+export NEWT_COLORS='
+    root=,blue
+    checkbox=,blue
+    entry=,blue
+    label=blue,
+    actlistbox=,blue
+    helpline=,blue
+    roottext=,blue
+    emptyscale=blue
+    disabledentry=blue,
+'
 
 # get makefile targets (all .PHONY entries)
 mapfile -t make_targets < <(grep "^\.PHONY:" makefile | awk -F': ' '{print $2}')
