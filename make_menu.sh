@@ -11,11 +11,12 @@ IFS=$'\n\t'
 #  1.0.1  2025-03-25  BHA  use width of title in menu width as well                     #
 #  1.0.2  2025-03-25  BHA  minor refactoring                                            #
 #  1.0.3  2025-04-23  BHA  adapt colors                                                 #
+#  1.0.4  2025-04-24  BHA  be explicit: add '--noitem' option to whiptail call          #
 #                                                                                       #
 # Purpose: menu for a makefile (every .PHONY target becomes an entry)                   #
 #                                                                                       #
 #########################################################################################
-VERSION="1.0.3"
+VERSION="1.0.4"
 
 #
 # FUNCTIONS
@@ -67,7 +68,7 @@ function menu() {
 
     # show menu
     local selection
-    selection=$(whiptail --title "${title}" --menu "${prompt}" ${menu_height} ${width} ${items_height} "${whiptail_items[@]}" 3>&1 1>&2 2>&3)
+    selection=$(whiptail --noitem --title "${title}" --menu "${prompt}" ${menu_height} ${width} ${items_height} "${whiptail_items[@]}" 3>&1 1>&2 2>&3)
 
     echo "${selection}"
 }
