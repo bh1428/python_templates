@@ -1,7 +1,4 @@
 {
-    "files.exclude": {
-        "**/.venv": true
-    },
     "cSpell.words": [
         "actlistbox",
         "cookiecutter",

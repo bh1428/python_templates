@@ -10,7 +10,6 @@
         "**/.coverage": true,
         "**/.git": true,
         "**/.pytest_cache": true,
-        "**/.venv": true,
         "**/.vscode": true,
         "**/*.egg-info": true,
         "**/*.whl": true,
