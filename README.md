@@ -13,17 +13,17 @@ This repository contains [Cookiecutter](https://cookiecutter.readthedocs.io/) te
 - __windows_standalone_exe__: standalone (Windows) executable (with an example how the combination of `click`, `logging` (both to file and console) and `pyinstaller` can be used).
 _ __vscode__: basic VSCode template.
 
-On Windows, you can use the PowerShell script `cookiecutter.ps1` to create new projects from the templates:
+You can use the `cookiecutter.*` scripts to create new projects from the templates:
 
-- Copy `cookiecutter.ps1` to your main project directory (projects will be created as sub-directories).
-- Adapt configuration in `cookiecutter.ps1`:
-  - `COOKIECUTTER`: location of the `cookiecutter.exe` executable (must be somewhere installed in a Python (virtual) environment)
-  - `TEMPLATE_DIRS`: templates should be sub-directories of this folder
-- Run `cookiecutter.ps1` and use the menu to select the template
+- Copy `cookiecutter.*` to your main project directory (projects will be created as sub-directories).
+- Adapt configuration in `cookiecutter.*`:
+  - `COOKIECUTTER`: location of the `cookiecutter(.exe)` executable (must be somewhere installed in a Python (virtual) environment)
+  - `TEMPLATE_DIR`: templates should be sub-directories of this folder
+- Run `cookiecutter.*` and use the menu to select a template
 
 ## uv / pip-tools
 
-Initially the templates were based on the wonderful [pip-tools](https://pip-tools.readthedocs.io/en/latest/). However, the release of [uv](https://docs.astral.sh/uv/) changed the world. While the workflow from `pip-tools` remains valid, the speed and convenience of `uv` make handling packages and virtual environments much more efficient. Currently, the templates are based on [uv](https://docs.astral.sh/uv/), but a workflow comparable to [pip-tools](https://pip-tools.readthedocs.io/en/latest/) is still implemented. In short:
+Initially the templates were based on the wonderful [pip-tools](https://pip-tools.readthedocs.io/en/latest/). However, the release of [uv](https://docs.astral.sh/uv/) changed the world. While the workflow from `pip-tools` remains valid, the speed and convenience of `uv` makes handling packages and virtual environments much more efficient. Currently, the templates are based on [uv](https://docs.astral.sh/uv/), but a workflow comparable to [pip-tools](https://pip-tools.readthedocs.io/en/latest/) is still implemented. In short:
 
 - `pyproject.toml` contains a list of prerequisites (`project.dependencies` and/or `project.optional-dependencies`).
 - `pyproject.toml` fixes the Python version to a patch release (e.g. 3.13.1).

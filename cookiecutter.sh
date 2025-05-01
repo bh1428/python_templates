@@ -9,13 +9,15 @@ IFS=$'\n\t'
 # Versions:                                                                             #
 #  1.0    2025-03-25  BHA  initial version                                              #
 #  1.0.1  2025-03-25  BHA  minor refactoring                                            #
+#  1.0.2  2025-05-01  BHA  whiptail colors                                              #
 #                                                                                       #
 # Purpose: use cookiecutter to create a project from a template                         #
 #                                                                                       #
 #########################################################################################
-VERSION="1.0.1"
-TEMPLATE_DIR="${HOME}/python_templates"
+VERSION="1.0.2"
 COOKIECUTTER="${HOME}/python-base/.venv/bin/cookiecutter"
+TEMPLATE_DIR="${HOME}/python_templates"
+
 
 #
 # FUNCTIONS
@@ -83,9 +85,23 @@ function gather_templates() {
     done
 }
 
+
 #
 # MAIN
 #
+
+# colors for whiptail (e.g. override '/etc/newt/palette')
+export NEWT_COLORS='
+    root=,blue
+    checkbox=,blue
+    entry=,blue
+    label=blue,
+    actlistbox=,blue
+    helpline=,blue
+    roottext=,blue
+    emptyscale=blue
+    disabledentry=blue,
+'
 
 # gather templates
 declare -A TEMPLATES

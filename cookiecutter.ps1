@@ -3,13 +3,15 @@
 # V1.0    2022-03-03  initial version
 # V1.1    2022-03-18  add 'x' (exit) option to menu
 # V1.1.1  2025-03-21  update TUI with newer version
+# V1.1.2  2025-05-01  use same configuration names as in *.sh version
+
 
 #
 # CONFIGURATION
 #
 $config = @{
     'COOKIECUTTER'  = 'cookiecutter.exe'
-    'TEMPLATE_DIRS' = '.\python_templates'
+    'TEMPLATE_DIR' = '.\python_templates'
     'TEMPLATES'     = [ordered]@{}
 }
 
@@ -196,7 +198,7 @@ function Get-Templates {
         [HashTable]$Config
     )
     $templates = @{}
-    foreach ($templateDir in Get-ChildItem -Directory -Exclude .git -Path $Config.TEMPLATE_DIRS) {
+    foreach ($templateDir in Get-ChildItem -Directory -Exclude .git -Path $Config.TEMPLATE_DIR) {
         $template = Join-Path -Path $templateDir -ChildPath cookiecutter.json
         if (Test-Path -Path $template) {
             $templateInfo = Get-Content $template -Raw | ConvertFrom-Json
