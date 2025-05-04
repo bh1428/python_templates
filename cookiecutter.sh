@@ -10,11 +10,12 @@ IFS=$'\n\t'
 #  1.0    2025-03-25  BHA  initial version                                              #
 #  1.0.1  2025-03-25  BHA  minor refactoring                                            #
 #  1.0.2  2025-05-01  BHA  whiptail colors                                              #
+#  1.1    2025-05-04  BHA  overwrite output folder if it exists                         #
 #                                                                                       #
 # Purpose: use cookiecutter to create a project from a template                         #
 #                                                                                       #
 #########################################################################################
-VERSION="1.0.2"
+VERSION="1.1"
 COOKIECUTTER="${HOME}/python-base/.venv/bin/cookiecutter"
 TEMPLATE_DIR="${HOME}/python_templates"
 
@@ -123,7 +124,7 @@ while true; do
     clear
     echo "Creating project for template: ${choice}"
     set +e
-    "${COOKIECUTTER}" "${TEMPLATES[$choice]}"
+    "${COOKIECUTTER}" --overwrite-if-exists "${TEMPLATES[$choice]}"
     set -e
 
     echo

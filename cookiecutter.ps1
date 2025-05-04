@@ -4,17 +4,17 @@
 # V1.1    2022-03-18  add 'x' (exit) option to menu
 # V1.1.1  2025-03-21  update TUI with newer version
 # V1.1.2  2025-05-01  use same configuration names as in *.sh version
+# V1.2    2025-05-04  overwrite output folder if it exists
 
 
 #
 # CONFIGURATION
 #
 $config = @{
-    'COOKIECUTTER'  = 'cookiecutter.exe'
+    'COOKIECUTTER' = 'cookiecutter.exe'
     'TEMPLATE_DIR' = '.\python_templates'
-    'TEMPLATES'     = [ordered]@{}
+    'TEMPLATES'    = [ordered]@{}
 }
-
 # end of configuration
 
 
@@ -241,7 +241,7 @@ function Invoke-Cookiecutter {
         [HashTable]$Config
     )
     Clear-Host
-    Invoke-Cmd -CmdExe $Config.COOKIECUTTER -Msg "creating project for template: $Template" "$($Config.TEMPLATES[$Template])"
+    Invoke-Cmd -CmdExe $Config.COOKIECUTTER -Msg "creating project for template: $Template" "--overwrite-if-exists" "$($Config.TEMPLATES[$Template])"
     Read-AnyKey
 }
 
