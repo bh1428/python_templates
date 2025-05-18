@@ -38,3 +38,7 @@ indent-width = 4
 max-line-length = 120
 disable = [
 ]
+
+[tool.pylint.typecheck]
+generated-members = [
+]
