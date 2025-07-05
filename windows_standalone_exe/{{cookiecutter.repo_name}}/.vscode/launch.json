@@ -6,7 +6,7 @@
     "configurations": [
         {
             "name": "Python: {{cookiecutter.repo_name}}.py",
-            "type": "python",
+            "type": "debugpy",
             "request": "launch",
             "program": "{{cookiecutter.repo_name}}.py",
             "console": "integratedTerminal",
