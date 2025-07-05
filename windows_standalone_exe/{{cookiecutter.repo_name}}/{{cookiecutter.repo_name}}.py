@@ -10,10 +10,15 @@ import sys
 import typing as tp
 
 import click
+from platformdirs import PlatformDirs
 
 import application
 
 __version__ = "{{ cookiecutter.app_version }}"
+
+# application directoy in %LOCALAPPDATA% will be 'COMPANY\APP_DIR'
+COMPANY = "{{ cookiecutter.author_company }}"
+LOCAL_APP_DIR = "{{ cookiecutter.repo_name }}"
 
 # logging configuration
 LogConfigType = dict[str, tp.Union[tp.Any, dict[str, tp.Union[tp.Any, dict[str, tp.Any]]]]]
@@ -56,12 +61,11 @@ LOG_LEVELS = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]
 @click.option("-d", "--divisor", default=1, type=click.INT)
 @click.option(
     "--logfile/--no-logfile",
-    default=False,
-    help="optionally log to a file (default is to console only)",
+    default=True,
+    help="disable logging to a file (default is to console and a logfile)",
 )
 @click.option(
     "--logdir",
-    default=".",
     type=click.Path(exists=True, writable=True),
     help="directory for the logfiles",
 )
@@ -77,6 +81,10 @@ def click_main(divisor: int, logfile: bool, logdir: str, loglevel: str) -> int:
     log_config = copy.deepcopy(LOG_CONFIG)
     log_config["root"]["level"] = loglevel
     if logfile:
+        if logdir is None:
+            logdir = PlatformDirs(appname=LOCAL_APP_DIR, appauthor=COMPANY, roaming=False).user_config_path
+            if not logdir.exists():
+                logdir.mkdir(parents=True)
         log_config["root"]["handlers"] = ["console", "file"]
         log_config["handlers"]["file"]["filename"] = pl.Path(logdir).joinpath(f"{script_name}.log")
     else:

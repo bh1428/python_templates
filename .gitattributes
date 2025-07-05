@@ -18,6 +18,7 @@
 #
 # Always perform LF normalization
 #
+*.iss               text
 *.jinja2            text
 *.json              text
 *.md                text diff=markdown

@@ -232,3 +232,4 @@ __marimo__/
 #
 # Additional files
 #
+/{{ cookiecutter.repo_name }}_info.txt
