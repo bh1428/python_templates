@@ -5,7 +5,7 @@ authors = [
 ]
 description = "Python templates"
 readme = "README.md"
-requires-python = "==3.13.5"
+requires-python = "==3.13.6"
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Programming Language :: Python :: 3",
