@@ -14,6 +14,7 @@
 .gitattributes      text export-ignore
 .gitignore          text export-ignore
 .gitkeep            text export-ignore
+.gitmodules         text export-ignore
 
 #
 # Always perform LF normalization
