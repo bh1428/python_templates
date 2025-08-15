@@ -1,7 +1,7 @@
 {
     "repo_name": "windows_qt",
     "app_description": "A PySide6 based project.",
-    "python_version": "3.13.6",
+    "python_version": "3.13.7",
     "app_version": "{% arrow_now 'local', 'YYYY.M.D' %}",
     "app_author": "Ben Hattem",
     "app_author_email": "benghattem@gmail.com",

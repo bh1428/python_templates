@@ -1,7 +1,7 @@
 {
     "repo_name": "windows_exe",
     "app_description": "A standalone Windows executable.",
-    "python_version": "3.13.6",
+    "python_version": "3.13.7",
     "app_version": "{% arrow_now 'local', 'YYYY.M.D' %}",
     "app_author": "Ben Hattem",
     "author_company": "nl.benhattem",
