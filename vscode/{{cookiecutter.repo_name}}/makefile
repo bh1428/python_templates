@@ -55,7 +55,7 @@ upgrade_requirements: $(VENV_ACTIVATE)
 	$(UV) pip compile pyproject.toml --upgrade --extra dev -o dev-requirements.txt
 
 .PHONY: upgrade_uv
-upgrade_uv: $(VENV_ACTIVATE)
+upgrade_uv:
 	$(UV) self update
 
 .PHONY: sync

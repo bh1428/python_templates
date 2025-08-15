@@ -53,7 +53,7 @@ dev-requirements.txt: $(VENV_ACTIVATE) pyproject.toml
 	$(UV) pip compile pyproject.toml --extra dev -o dev-requirements.txt
 
 .PHONY: upgrade_uv
-upgrade_uv: $(VENV_ACTIVATE)
+upgrade_uv:
 	$(UV) self update
 
 .PHONY: upgrade_requirements
