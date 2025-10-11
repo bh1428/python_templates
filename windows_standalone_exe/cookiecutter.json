@@ -1,12 +1,14 @@
 {
     "repo_name": "windows_exe",
     "app_description": "A standalone Windows executable.",
-    "python_version": "3.13.7",
+    "python_version": "3.13.8",
     "app_version": "{% arrow_now 'local', 'YYYY.M.D' %}",
     "app_author": "Ben Hattem",
     "author_company": "nl.benhattem",
     "app_author_email": "benghattem@gmail.com",
     "app_copyright_holder": "Ben Hattem",
     "copyright_year": "{% arrow_now 'local', 'YYYY' %}",
-    "_extensions": ["extensions.ArrowNowExtension"]
+    "_extensions": [
+        "extensions.ArrowNowExtension"
+    ]
 }
