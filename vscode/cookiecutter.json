@@ -1,7 +1,7 @@
 {
     "repo_name": "vscode",
     "repo_description": "A project using VSCode.",
-    "python_version": "3.13.8",
+    "python_version": "3.13.9",
     "repo_version": "{% arrow_now 'local', 'YYYY.M.D' %}",
     "repo_author": "Ben Hattem",
     "repo_author_email": "benghattem@gmail.com",
