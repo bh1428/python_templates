@@ -8,10 +8,10 @@
 
 This repository contains [Cookiecutter](https://cookiecutter.readthedocs.io/) templates for Python development projects (on Windows and limited Linux support). All templates use a combination of make with [uv](https://docs.astral.sh/uv/) to manage a virtual environment. `uv` and `make` MUST be preinstalled in the OS. These templates are available:
 
+- __vscode__: basic VSCode template.
 - __windows_package__: minimal Python package setup.
 - __windows_qt__: basic Qt / PySide6 application (using VSCode and QT Designer).
 - __windows_standalone_exe__: standalone (Windows) executable (with an example how the combination of `click`, `logging` (both to file and console) and `pyinstaller` can be used).
-_ __vscode__: basic VSCode template.
 
 You can use the `cookiecutter.*` scripts to create new projects from the templates:
 
