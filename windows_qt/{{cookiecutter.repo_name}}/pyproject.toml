@@ -6,14 +6,14 @@ authors = [
 description = "{{ cookiecutter.app_description }}"
 requires-python = "=={{ cookiecutter.python_version }}"
 classifiers = [
-    "Development Status :: 1 - Planning",
-    "License :: Other/Proprietary License",
-    "Operating System :: Microsoft :: Windows",
-    "Private :: Do Not Upload",
-    "Programming Language :: Python :: 3",
+  "Development Status :: 1 - Planning",
+  "License :: Other/Proprietary License",
+  "Operating System :: Microsoft :: Windows",
+  "Private :: Do Not Upload",
+  "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "pyside6",
+  "pyside6",
 ]
 dynamic = ["version"]
 

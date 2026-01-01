@@ -6,22 +6,22 @@ authors = [
 description = "{{ cookiecutter.app_description }}"
 requires-python = "=={{ cookiecutter.python_version }}"
 classifiers = [
-    "Development Status :: 1 - Planning",
-    "License :: Other/Proprietary License",
-    "Operating System :: Microsoft :: Windows",
-    "Private :: Do Not Upload",
-    "Programming Language :: Python :: 3",
+  "Development Status :: 1 - Planning",
+  "License :: Other/Proprietary License",
+  "Operating System :: Microsoft :: Windows",
+  "Private :: Do Not Upload",
+  "Programming Language :: Python :: 3",
 ]
 dependencies = [
-    "click",
-    "platformdirs",
+  "click",
+  "platformdirs",
 ]
 dynamic = ["version"]
 
 [project.optional-dependencies]
 dev = [
-    "pyinstaller",
-    "pywin32-ctypes",
+  "pyinstaller",
+  "pywin32-ctypes",
 ]
 
 [build-system]

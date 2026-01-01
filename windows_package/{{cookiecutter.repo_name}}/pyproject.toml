@@ -5,11 +5,11 @@ authors = [{ name = "{{ cookiecutter.copyright_author }}", email = "{{ cookiecut
 readme = "README.md"
 requires-python = ">=3.13"
 classifiers = [
-    "Development Status :: 1 - Planning",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: Microsoft :: Windows",
-    "Private :: Do Not Upload",
-    "Programming Language :: Python :: 3",
+  "Development Status :: 1 - Planning",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: Microsoft :: Windows",
+  "Private :: Do Not Upload",
+  "Programming Language :: Python :: 3",
 ]
 dependencies = [
 ]
@@ -17,9 +17,9 @@ dynamic = ["version"]
 
 [project.optional-dependencies]
 dev = [
-    "coverage",
-    "pytest",
-    "pytest-cov",
+  "coverage",
+  "pytest",
+  "pytest-cov",
 ]
 
 [build-system]

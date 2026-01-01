@@ -8,14 +8,14 @@ readme = "README.md"
 requires-python = "==3.14.2"
 license = "MIT"
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.14",
-    "License :: OSI Approved :: MIT License",
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.14",
+  "License :: OSI Approved :: MIT License",
 ]
 dependencies = [
-    "jinja2",
-    "requests",
+  "jinja2",
+  "requests",
 ]
 dynamic = ["version"]
 
@@ -37,9 +37,8 @@ universal = true
 line-length = 120
 indent-width = 4
 exclude = [
-    "vscode",
-    "windows_package",
-    "windows_qt",
-    "windows_standalone_exe",
+  "vscode",
+  "windows_package",
+  "windows_qt",
+  "windows_standalone_exe",
 ]
-
