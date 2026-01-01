@@ -2,7 +2,7 @@
     "repo_name": "package",
     "package_name": "{{ cookiecutter.repo_name }}",
     "package_description": "Package description.",
-    "python_version": "3.13.9",
+    "python_version": "3.14.2",
     "package_version": "{% arrow_now 'local', 'YYYY.M.D' %}",
     "copyright_author": "Ben Hattem",
     "author_email": "benghattem@gmail.com",
